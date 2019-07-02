@@ -2,9 +2,9 @@
 
 ### Table of Contents
   * [Java Common Syntax](#Syntax)
-	  * [Arrays] (#arrays)
-	  * [Conditionals] (#Conditionals)
-	  * [loops] (#loops)
+  * [Arrays] (#arrays)
+  * [Conditionals] (#Conditionals)
+  * [loops] (#loops)
   * [Object Oriented Programming](#Classes)
   * [Chapter 3](#Data-Structures)
   * [ArrayLists] (#List:-ArrayLists)
