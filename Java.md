@@ -7,9 +7,12 @@
 	  * [loops](#loops)
   * [Object Oriented Programming](#Classes)
   * [Data Structures](#Data-Structures)
-  * [ArrayLists](#list-arraylists)
+	  * [ArrayLists](#list-arraylists---java-docs)
+	  * [LinkedLists](#list-arraylists---java-docs)
+	  * [HashSets](#list-arraylists---java-docs)
+	  * [HashMaps](#list-arraylists---java-docs)
   *
-  *
+	  
 
 ## Syntax
 	
@@ -203,6 +206,11 @@ A mixture of an interface and a parent class.
 		public abstract void doSomething();
 	}
 
+
+### TypeCasting
+
+	LinkedList<Integer> castedList = (LinkedList<Integer>)numbersArray;	
+
 # Data Structures
 
 Simplified Class Hierarchy of useful Date Structurs:
@@ -275,7 +283,7 @@ Instead, we can use: `Integer myInteger = 12;` This is called Autoboxing.
 
 To do the opposite, we can use: `int myPrimitive = myInteger;` This is called Unboxing.
 
-## List: LinkedLists: https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html
+## List: LinkedLists: [Java Docs](https://docs.oracle.com/javase/8/docs/api/java/util/LinkedList.html)
 
 A linked list consists of nodes where each node contains a data field and a reference(link) to the next node in the list.
 
@@ -286,7 +294,7 @@ Advantages over arrays:
 1. Dynamic size
 1. Ease of insertion/deletion
 
-## Set: HashSets: https://docs.oracle.com/javase/8/docs/api/java/util/HashSet.html
+## Set: HashSets: [Java Docs](https://docs.oracle.com/javase/8/docs/api/java/util/HashSet.html)
 
 Basically, an un-ordered list that doesn't accept duplicate entries.
 
@@ -296,7 +304,7 @@ Adding entries, `setName.add(5);`
 
 *Note:* For more methods, check the link above.
 
-## Map: HashMaps: https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html
+## Map: HashMaps: [Java Docs](https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html)
 
 HashMaps are maps that have keys and values, where keys can be used to retrieve values. 
 
@@ -375,9 +383,6 @@ There are two ways to address code that might throw an exception:
 * `FileNotFoundException`
 * `IOException`
 
-### TypeCasting
-
-	LinkedList<Integer> castedList = (LinkedList<Integer>)numbersArray;
 
 ### Try... Catch & Throw (https://www.w3schools.com/java/java_try_catch.asp)	
 		
