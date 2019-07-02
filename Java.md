@@ -1,9 +1,15 @@
 # Java
 
-# Table of Contents
-  * [Java Syntax](#Syntax)
-  * [Chapter 2](#Classes)
+### Table of Contents
+  * [Java Common Syntax](#Syntax)
+	  * [Arrays] (#arrays)
+	  * [Conditionals] (#Conditionals)
+	  * [loops] (#loops)
+  * [Object Oriented Programming](#Classes)
   * [Chapter 3](#Data-Structures)
+  * [ArrayLists] (#List:-ArrayLists)
+  *
+  *
 
 ## Syntax
 	
@@ -215,7 +221,9 @@ Simplified Class Hierarchy of useful Date Structurs:
       * LinkedHashMap<K,V> (implements Map<K,V>)
 	
 
-## List: ArrayLists: https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html
+## List: ArrayLists
+
+https://docs.oracle.com/javase/8/docs/api/java/util/ArrayList.html
 
 Lists only accept elements that are objects [Wrapper Classes], such as Integer, Float, Double, etc... as opposed to primitive types, such as int, double, float, etc. 
 
