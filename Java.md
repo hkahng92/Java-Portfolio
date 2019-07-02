@@ -71,7 +71,7 @@ Scanner can also take in integers, floats, doubles...
 	
 Where # is the number of elements inside an array of integers [0:(#-1)] 
 	
-### Arrays:	
+### Arrays	
 First method:
 
 	int[] arr = new int[3]; //initializing; 
@@ -81,7 +81,7 @@ Second method:
 
 	int[] arr = {15, 25, 35};
 	
-### Conditionals:
+### Conditionals
 If Statements: 
 	
 	if (){
@@ -103,7 +103,7 @@ Switch Statements:
 			break;
 	}
 	
-### Loops:
+### Loops
 		
 `while (condition) { //Statement }`
 
