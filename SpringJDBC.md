@@ -339,4 +339,12 @@ Project Name: App
 			
 1. Run the tests, refactor...
 
+### Common Exceptions, and how to handle them
+
+* `NullPointerException` while running the tests
+	* Solution: Make sure to include Class-level annotations for the test files
+			
+			@RunWith(SpringJUnit4ClassRunner.class)
+			@SpringBootTest
+
 #### [Go Back](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/README.md)

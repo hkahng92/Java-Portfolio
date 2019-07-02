@@ -9,4 +9,6 @@
 
 ### **Check list - Using Coffee Inventory project example**
 
+### Common Exceptions, and how to handle them
+
 #### [Go Back](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/README.md)
