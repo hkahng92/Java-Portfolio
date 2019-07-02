@@ -2,8 +2,8 @@
 
 **Check list: Using Car Lot project example**
 
-- [] Configure the Pom.xml file by adding `[<version>5.1.46</version>]` to SQL dependency
-- [] Creating DTO (models)
+1. Configure the Pom.xml file by adding `[<version>5.1.46</version>]` to SQL dependency
+1. Creating DTO (models)
 	1. Adding properties, getters, and setters
 	1. Overriding .equals method
 	
