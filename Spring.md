@@ -6,7 +6,7 @@
 * Spring Data JPA: Persist data in SQL stores with Java Persistence API using Spring Data and Hibernate.
 * MySQL Driver: MySQL JDBC Driver
 
-Note: to have TOMCAT, make sure to use Jar format.	
+Note: to use TOMCAT as an embedded servlet container, make sure to use Jar format.	
 	
 # Spring Annotations
 
