@@ -686,10 +686,10 @@ The Java stream system provides more complicated lambda features. The stream cal
 	
 # Useful Code 
 
-### MATH: https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html
+### [MATH](https://docs.oracle.com/javase/8/docs/api/java/lang/Math.html)
 		
 
-### Recursion (https://www.java-samples.com/showtutorial.php?tutorialid=151)
+### [Recursion](https://www.java-samples.com/showtutorial.php?tutorialid=151)
 Calling the method from inside the method:
 
 	int fact(int n) {
