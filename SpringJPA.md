@@ -1,9 +1,8 @@
-# Creating a Spring Project with Database access using JDBC
+# Creating a Spring Project with Database access using JPA
 
-**Check list: Using Car Lot project example**
+**Check list: Using Coffee Inventory example**
 
 1. Configure the Pom.xml file by adding `[<version>5.1.46</version>]` to SQL dependency
-	[] completed
 1. Creating DTO (models)
 	1. Adding properties, getters, and setters
 	1. Overriding .equals method
