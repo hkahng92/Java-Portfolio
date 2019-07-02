@@ -1,10 +1,17 @@
-# Java Syntax
+# Java
+
+# Table of Contents
+  * [Java Syntax](#Syntax)
+  * [Chapter 2](#Classes)
+  * [Chapter 3](#Data Structures)
+
+## Syntax
 	
 pvsm: `public static void main{};`
 
 sout: `System.out.printLn();` note: uses CRLF line spacing
 	
-## Strings:
+### Strings:
 Compare Strings: `variable.equals("txt");`
 
 Use `var.length()` method to get int with length
@@ -17,7 +24,7 @@ Use `.toLowerCase()` OR `.toUpperCase()` to turn Strings into all lower or upper
 
 To replace a part of a String, `.replaceAll("x", "")` can be used on String variables.
 
-## Printing Formated Numbers to Console:
+### Printing Formated Numbers to Console:
 `System.out.printf("%.2f", val);`
 			
 `System.out.format("text %f.", val);`
@@ -39,7 +46,7 @@ Flags:
 * `,` : comma grouping separator (for numbers > 1000)
 * ` ` : space will display a minus sign if the number is negative or a space if it is positive
 	
-## Scanner:
+### Scanner:
 
 	Scanner myScanner = new Scanner(System.in);
 	String width = myScanner.nextLine();
@@ -51,14 +58,14 @@ Scanner can also take in integers, floats, doubles...
 	float width = Float.parseFloat(myScanner.nextLine());
 	int width = Integer.parseInt(myScanner.nextLine());
 
-## Random Generator:	
+### Random Generator:	
 	
 	Random myRandom = new Random();
 	int randNum = myRandom.nextInt(#); 
 	
 Where # is the number of elements inside an array of integers [0:(#-1)] 
 	
-## Arrays:	
+### Arrays:	
 First method:
 
 	int[] arr = new int[3]; //initializing; 
@@ -68,7 +75,7 @@ Second method:
 
 	int[] arr = {15, 25, 35};
 	
-## Conditionals:
+### Conditionals:
 If Statements: 
 	
 	if (){
@@ -90,7 +97,7 @@ Switch Statements:
 			break;
 	}
 	
-## Loops:
+### Loops:
 		
 `while (condition) { //Statement }`
 
@@ -694,24 +701,3 @@ Calling the method from inside the method:
 	$ ls
 	$ pwd
 	$ explorer .
-
-# SQL:
-
-	CREATE DATABASE **database_name**;
-
-	USE **database_name**;
-	CREATE TABLE **table_name** (
-	  id INT AUTO_INCREMENT NOT NULL,
-	  Title VARCHAR(250) NOT NULL,
-	  Author VARCHAR(250) NOT NULL,
-	  In_stock BOOLEAN DEFAULT TRUE,
-	  Quantity INT,
-	  PRIMARY KEY (id)
-	  );
-
-	USE **database_name**;
-	INSERT INTO **table_name** (title, author, quantity) VALUES ('Title 1','Author 1',19);
-	UPDATE **table_name** SET quantity = 10 WHERE ID=2;
-	DELETE FROM **table_name** WHERE id = 3;
-	SELECT * FROM **table_name**;
-	SELECT title, author FROM **table_name**;
