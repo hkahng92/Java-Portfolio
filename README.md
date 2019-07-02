@@ -1,8 +1,8 @@
 # Cheat Sheets
 
 ### Table of Contents
-  * #### [Java](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/Java.md)
-  * #### [Spring](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/Spring.md)
+  * #### [Java Syntax](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/Java.md)
+  * #### [Spring Web Services](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/Spring.md)
 	* #### [Spring JDBC](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/SpringJDBC.md)
 	* #### [Spring JPA](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/SpringJPA.md)
   * #### [MySQL](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/mySQL.md)
