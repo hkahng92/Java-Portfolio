@@ -7,7 +7,7 @@
 * JDBC API
 * MySQL Driver
 
-# Spring Project Compostion
+### Spring Project Compostion
 
 Project Name: App
 
@@ -28,7 +28,7 @@ Project Name: App
 * test.resources (package)
 	* application.properties
 
-**Check list: Using Car Lot project example**
+### **Check list: Using Car Lot project example**
 
 1. Configure the Pom.xml file by adding `[<version>5.1.46</version>]` to SQL dependency
 1. Creating DTO (models)

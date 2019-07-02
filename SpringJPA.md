@@ -7,4 +7,4 @@
 * Spring Data JPA
 * MySQL Driver
 
-**Check list: Using Coffee Inventory project example**
+### **Check list: Using Coffee Inventory project example**
