@@ -3,7 +3,7 @@
 # Table of Contents
   * [Java Syntax](#Syntax)
   * [Chapter 2](#Classes)
-  * [Chapter 3](#Data Structures)
+  * [Chapter 3](#Data-Structures)
 
 ## Syntax
 	
