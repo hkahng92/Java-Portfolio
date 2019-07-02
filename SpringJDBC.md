@@ -28,7 +28,7 @@ Project Name: App
 * test.resources (package)
 	* application.properties
 
-### **Check list: Using Car Lot project example**
+### **Check list - Using Car Lot project example**
 
 1. Configure the Pom.xml file by adding `[<version>5.1.46</version>]` to SQL dependency
 1. Creating DTO (models)
@@ -337,4 +337,6 @@ Project Name: App
 				jdbcTemplate.update(DELETE_CAR_SQL, id);
 			}
 			
-1. Run the tests, refactor...		
+1. Run the tests, refactor...
+
+## [Go Back](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/README.md)
