@@ -1,5 +1,33 @@
 # Creating a Spring Project with Database access using JDBC
 
+### Spring Initializer Dependencies
+
+* Spring Web Starter
+* Spring HATEOAS
+* JDBC API
+* MySQL Driver
+
+# Spring Project Compostion
+
+Project Name: App
+
+* main.java.com.company.artifactName (package)
+	* AppApplication.java (used to run Service)
+	* controller (package)
+		* AppController.java
+		* ControllerExceptionHandler.java
+	* model (package)
+		* AppModel.java - Data Transfer Objects [DTO]
+	* dao (package) - Data Access Objects [DAO]
+		* AppDao.java (Interface)
+		* AppDaoJdbcTemplateImpl.java
+* main.resources (package)
+	* application.properties
+* test.java.com.company.artifactName (package)
+	* *test files*
+* test.resources (package)
+	* application.properties
+
 **Check list: Using Car Lot project example**
 
 1. Configure the Pom.xml file by adding `[<version>5.1.46</version>]` to SQL dependency

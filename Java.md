@@ -8,10 +8,16 @@
   * [Object Oriented Programming](#Classes)
   * [Data Structures](#Data-Structures)
 	  * [ArrayLists](#list-arraylists---java-docs)
-	  * [LinkedLists](#list-arraylists---java-docs)
-	  * [HashSets](#list-arraylists---java-docs)
-	  * [HashMaps](#list-arraylists---java-docs)
-  *
+	  * [LinkedLists](#list-linkedlists-java-docs)
+	  * [HashSets](#set-hashsets-java-docs)
+	  * [HashMaps](#map-hashmaps-java-docs)
+  * [Exceptions](#exceptions)
+  * [File I/O](#printing--reading-from-files)
+	  * [CSV](#1-csv)
+	  * [JSON](#2-json)
+	  * [XML](#3-xml)
+  * [Java Functional API](#java-functional-api)
+  * [Useful Code](#useful-code)
 	  
 
 ## Syntax
@@ -692,23 +698,3 @@ Calling the method from inside the method:
 		result = fact (n-1) * n;
 		return result;
 		}
-
-# GIT:
-
-	Git clone
-	Git checkout -b "branch name" : only use -b to add new branch
-	Git add -A : -A for all files
-	Git commit -m "Comment" 
-	Git push origin "branch name"
-	Git pull
-
-# BASH:
-
-	$ cd ~
-	$ cd ..
-	$ cd "child folder"
-	$ mkdir "new folder"
-	$ touch "new file"
-	$ ls
-	$ pwd
-	$ explorer .

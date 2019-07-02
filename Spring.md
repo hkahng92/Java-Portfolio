@@ -2,32 +2,11 @@
 
 * Spring Web Starter : Spring Boot
 * Spring HATEOAS: Necessary for Exception handling
-* Spring Web Services
 * JDBC API: Database Connectivity API that defines how a client may connect and query a database.
+* Spring Data JPA: Persist data in SQL stores with Java Persistence API using Spring Data and Hibernate.
 * MySQL Driver: MySQL JDBC Driver
 
-Note: to have TOMCAT, make sure to use Jar format.
-
-# Spring Project Compostion
-
-Project Name: App
-
-* main.java.com.company.artifactName (package)
-	* AppApplication.java (used to run Service)
-	* controller (package)
-		* AppController.java
-		* ControllerExceptionHandler.java
-	* model (package)
-		* AppModel.java - Data Transfer Objects [DTO]
-	* dao (package) - Data Access Objects [DAO]
-		* AppDao.java (Interface)
-		* AppDaoJdbcTemplateImpl.java
-* main.resources (package)
-	* application.properties
-* test.java.com.company.artifactName (package)
-	* *test files*
-* test.resources (package)
-	* application.properties	
+Note: to have TOMCAT, make sure to use Jar format.	
 	
 # Spring Annotations
 
@@ -46,7 +25,6 @@ One use for annotations is **Dependency Injection**, where Spring implicitly use
 			return input;
 		}
 	}
-	
 
 ## Class-level annotation
 
@@ -144,4 +122,6 @@ Simply replace `IllegalArgumentException` with exception type.
         return responseEntity;
     }
 	
-# Creating a Spring Project with Database access using DAOs	
+### [Creating a Spring Project with Database access using JDBC](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/SpringJDBC.md)
+
+### [Creating a Spring Project with Database access using JPA](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/SpringJPA.md)
