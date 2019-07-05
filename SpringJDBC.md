@@ -30,7 +30,7 @@ Project Name: App
 
 ### **Check list - Using Car Lot project example**
 
-1. Configure the Pom.xml file by adding `[<version>5.1.46</version>]` to SQL dependency
+1. Configure the Pom.xml file by adding `<version>5.1.46</version>` to SQL dependency
 1. Creating DTO (models)
 	1. Adding properties, getters, and setters
 	1. Overriding .equals method
@@ -338,6 +338,8 @@ Project Name: App
 			}
 			
 1. Run the tests, refactor...
+
+### Adding View Models & Service layer
 
 ### Common Exceptions, and how to handle them
 
