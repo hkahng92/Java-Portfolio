@@ -11,25 +11,22 @@
 
 Project Name: App
 
-* main.java.com.company.artifactName (package)
-	|_ java
-		|_com.company.artifactName
-	|_ resources
-	* AppApplication.java (used to run Service)
-	* controller (package)
+* main.java.com.company.artifactName
+	* controller
 		* AppController.java
 		* ControllerExceptionHandler.java
-	* model (package)
-		* AppModel.java - Data Transfer Objects [DTO]
-	* dao (package) - Data Access Objects [DAO]
-		* AppDao.java (Interface)
+	* model - Contains Data Transfer Objects [DTO]
+		* AppModel.java
+	* dao - Contains Data Access Objects [DAO]
+		* AppDao.java `<Interface>`
 		* AppDaoJdbcTemplateImpl.java
-* main.resources (package)
-	* application.properties
-* test.java.com.company.artifactName (package)
+	* AppApplication.java - used to run Service
+* main.resources
+	* application.properties - used to setup DB connection
+* test.java.com.company.artifactName
 	* *test files*
-* test.resources (package)
-	* application.properties
+* test.resources
+	* application.properties - used to setup test DB connection
 
 ### **Check list - Using Car Lot project example**
 
