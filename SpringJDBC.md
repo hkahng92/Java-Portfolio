@@ -13,18 +13,18 @@ Project Name: App
 
 * main.java.com.company.artifactName
 	* controller
-		* AppController.java
-		* ControllerExceptionHandler.java
+		* AppController `<Class>`
+		* ControllerExceptionHandler `<Class>`
 	* model - Contains Data Transfer Objects [DTO]
-		* AppModel.java
+		* AppModel `<Class>`
 	* dao - Contains Data Access Objects [DAO]
-		* AppDao.java `<Interface>`
-		* AppDaoJdbcTemplateImpl.java
-	* AppApplication.java - used to run Service
+		* AppDao`<Interface>`
+		* AppDaoJdbcTemplateImpl `<Class>`
+	* AppApplication `<Class>` - used to run Service
 * main.resources
 	* application.properties - used to setup DB connection
 * test.java.com.company.artifactName
-	* *test files*
+	* *test files* `<Class>`
 * test.resources
 	* application.properties - used to setup test DB connection
 
