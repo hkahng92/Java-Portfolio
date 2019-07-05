@@ -12,6 +12,9 @@
 Project Name: App
 
 * main.java.com.company.artifactName (package)
+	|_ java
+		|_com.company.artifactName
+	|_ resources
 	* AppApplication.java (used to run Service)
 	* controller (package)
 		* AppController.java
