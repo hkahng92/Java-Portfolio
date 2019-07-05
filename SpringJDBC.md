@@ -216,7 +216,7 @@ Project Name: App
 		spring.datasource.password: rootroot
 		spring.datasource.driver-class-name: com.mysql.jdbc.Driver
 
-1. Create schemas and tables: Check mySQL.md
+1. Create schemas and tables: [MySQL](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/mySQL.md)
 1. We go back to the actual implementation of the DAO class: 
 	1. Add the JdbcTemplate constructor
 	
@@ -272,7 +272,7 @@ Project Name: App
 			private static final String SELECT_CARS_BY_COLOR_SQL =
 					"select * from car where color = ?";
 	
-	1. Implementing methods using `jdbcTemplate.query` or `jdbcTemplate.queryforObject`
+	1. Implementing methods using `jdbcTemplate.query`, `jdbcTemplate.update`, or `jdbcTemplate.queryforObject`
 	
 		**Example:**
 		
@@ -338,7 +338,7 @@ Project Name: App
 				jdbcTemplate.update(DELETE_CAR_SQL, id);
 			}
 			
-1. Run the tests, refactor...
+1. Run the tests, re-factor...
 
 ### Adding View Models & Service layer
 
