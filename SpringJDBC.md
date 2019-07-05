@@ -279,9 +279,7 @@ Project Name: App
 			@Override
 			public Car getCar(int id) {
 				try {
-
 					return jdbcTemplate.queryForObject(SELECT_CAR_SQL, this::mapRowToCar, id);
-
 				} catch (EmptyResultDataAccessException e) {
 					// if nothing is returned just catch the exception and return null
 					return null;
@@ -290,11 +288,7 @@ Project Name: App
 
 			@Override
 			public List<Car> getAllCars() {
-				try {
-					return jdbcTemplate.query(SELECT_ALL_CARS_SQL, this::mapRowToCar);
-				} catch (NullPointerException e) {
-					return null;
-				}
+				return jdbcTemplate.query(SELECT_ALL_CARS_SQL, this::mapRowToCar);
 			}
 
 			@Override
@@ -303,18 +297,10 @@ Project Name: App
 			}
 
 			@Override
-			public List<Car> getCarsByColor(String color) {
-				return jdbcTemplate.query(SELECT_CARS_BY_COLOR_SQL, this::mapRowToCar, color);
-			}
-
-			@Override
 			@Transactional
 			public Car addCar(Car car) {
 				jdbcTemplate.update(INSERT_CAR_SQL,
-						car.getMake(),
-						car.getModel(),
-						car.getYear(),
-						car.getColor());
+						car.getMake(), car.getModel(), car.getYear(), car.getColor());
 
 				int id = jdbcTemplate.queryForObject("select last_insert_id()", Integer.class);
 
@@ -326,10 +312,7 @@ Project Name: App
 			@Override
 			public void updateCar(Car car) {
 				jdbcTemplate.update(UPDATE_CAR_SQL,
-						car.getMake(),
-						car.getModel(),
-						car.getYear(),
-						car.getColor(),
+						car.getMake(), car.getModel(), car.getYear(), car.getColor(),
 						car.getId());
 			}
 
