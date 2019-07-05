@@ -27,6 +27,7 @@ Project Name: App
 	* *test files* `<Class>`
 * test.resources
 	* application.properties - used to setup test DB connection
+* Dom.xml - used to setup dependencies
 
 ### **Check list - Using Car Lot project example**
 
