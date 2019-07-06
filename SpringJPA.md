@@ -1,4 +1,4 @@
-# Creating a Spring Project with Database access using JPA
+# Spring Project: Java DAO Using JPA
 
 ### Spring Initializer Dependencies
 

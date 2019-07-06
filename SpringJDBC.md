@@ -1,4 +1,4 @@
-# Creating a Spring Project with Database access using JDBC
+# Spring Project: Java DAO Using JDBC
 
 ### Spring Initializer Dependencies
 
