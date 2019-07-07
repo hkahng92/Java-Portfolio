@@ -28,8 +28,6 @@ In MySQL, physically, a schema is synonymous with a database.
 	alter table book add constraint fk_book_publisher foreign key (publisher_id) references publisher(publisher_id);
 
 ### CRUD Queries
-
-Remeber to `use book_store;`
 	
 Create: `insert into book (title, isbn, price, publish_date, author_id, publisher_id) values (?, ?, ?, ?, ?, ?)`
 
@@ -41,7 +39,7 @@ Update: `update book set title = ?, isbn = ?, price = ?, publish_date = ?, autho
 
 Delete: `delete from book where book_id = ?`
 
-#### Notes
+#### Notes:
 
 Instead of `select *` we can specify which columns to be rendered by using `select title, isbn from book`
 
