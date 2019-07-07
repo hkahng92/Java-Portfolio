@@ -90,9 +90,7 @@ Project Name: App
 			
 		`@GeneratedValue` is used to auto increment id. `GenerationType.IDENTITY` was found to behave better than `GenerationType.AUTO`.
 		
-		* Child Tables:
-		
-		We use Sets to define child tables in the Parent class. Then, use the `@OneToMany` to join using the Foriegn key.
+		* Child Tables: We use Sets to define child tables in the Parent class. Then, use the `@OneToMany` to join using the Foriegn key.
 		
 				@OneToMany(mappedBy = "customerId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 				private Set<Note> notes;
