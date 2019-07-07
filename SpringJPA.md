@@ -193,7 +193,14 @@ Project Name: App
 
 * Not being able to connect to database
 	* Solution: add `spring.datasource.driver-class-name: com.mysql.jdbc.Driver` to application.properties
+* SSL-related Exception
+	* Solution: Adding the following dependency might help
 	
+			<dependency>
+				<groupId>javax.xml.bind</groupId>
+				<artifactId>jaxb-api</artifactId>
+				<version>2.3.0</version>
+			</dependency>
 
 
 #### [Go Back](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/README.md)
