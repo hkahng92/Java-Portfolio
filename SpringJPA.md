@@ -14,11 +14,10 @@ Project Name: App
 	* controller
 		* AppController `<Class>`
 		* ControllerExceptionHandler `<Class>`
-	* model - Contains Data Transfer Objects [DTO]
+	* dto - Contains Data Transfer Objects [DTO]
 		* AppModel `<Class>`
 	* dao - Contains Data Access Objects [DAO]
-		* AppDao`<Interface>`
-		* AppDaoJdbcTemplateImpl `<Class>`
+		* Repository`<Interface>`
 	* AppApplication `<Class>` - used to run Service
 * main.resources
 	* application.properties - used to setup DB connection
@@ -26,7 +25,7 @@ Project Name: App
 	* *test files* `<Class>`
 * test.resources
 	* application.properties - used to setup test DB connection
-* Dom.xml - used to setup dependencies
+* pom.xml - used to setup dependencies
 
 ### **Check list - Using Simple CRM project example**
 
@@ -176,7 +175,7 @@ Project Name: App
 		}
 		
 1. Run the tests, re-factor...
-1. To use JPA DAO in the controller, we simply `@autowired` the Repositories in the controller class to use their methods:
+1. To use JPA DAO in the controller, we simply `@Autowired` the Repositories in the controller class to use their methods:
 
 		@Autowired
 		private CustomerRepository customerRepo;
