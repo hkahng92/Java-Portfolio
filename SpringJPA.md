@@ -190,6 +190,10 @@ Project Name: App
 		}
 		
 ### Common Exceptions, and how to handle them
-SSL
+
+* Not being able to connect to database
+	* Solution: add `spring.datasource.driver-class-name: com.mysql.jdbc.Driver` to application.properties
+	
+
 
 #### [Go Back](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/README.md)
