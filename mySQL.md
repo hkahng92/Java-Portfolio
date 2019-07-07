@@ -4,7 +4,7 @@
 
 ### Creating a schema
 
-In MySQL, physically, a schema is synonymous with a database.
+In MySQL, a schema is synonymous with a database.
 	
 	create schema if not exists book_store;
 

@@ -3,7 +3,6 @@
 ### Spring Initializer Dependencies
 
 * Spring Web Starter
-* Spring HATEOAS
 * JDBC API
 * MySQL Driver
 
@@ -36,7 +35,6 @@ Project Name: App
 	1. Create schema and run db creation script with MySQL Workbench: [MySQL](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/mySQL.md)
 1. Configuration
 	1. Configure the Pom.xml file by adding `<version>5.1.46</version>` to SQL dependency
-	1. Create schemas and tables: 
 	1. Configure application.properties (for application)
 
 			spring.datasource.url: jdbc:mysql://localhost:3306/car_lot?useSSL=false
