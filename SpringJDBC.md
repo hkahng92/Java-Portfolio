@@ -31,7 +31,19 @@ Project Name: App
 
 ### **Check list - Using Car Lot project example**
 
-1. Configure the Pom.xml file by adding `<version>5.1.46</version>` to SQL dependency
+1. Project Creation
+	1. Create project with Spring Initializr. Include web, mysql, jdbc
+	1. Create schema and run db creation script with MySQL Workbench: [MySQL](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/mySQL.md)
+1. Configuration
+	1. Configure the Pom.xml file by adding `<version>5.1.46</version>` to SQL dependency
+	1. Create schemas and tables: 
+	1. Configure application.properties (for application)
+
+			spring.datasource.url: jdbc:mysql://localhost:3306/car_lot?useSSL=false
+			spring.datasource.username: root
+			spring.datasource.password: rootroot
+			spring.datasource.driver-class-name: com.mysql.jdbc.Driver
+			
 1. Creating DTO (models)
 	1. Adding properties, getters, and setters
 	1. Overriding .equals method
@@ -202,12 +214,6 @@ Project Name: App
 			assertEquals(carList.size(), 1);
 		}
 	
-1. Configure application.properties (for application)
-
-		spring.datasource.url: jdbc:mysql://localhost:3306/car_lot?useSSL=false
-		spring.datasource.username: root
-		spring.datasource.password: rootroot
-		spring.datasource.driver-class-name: com.mysql.jdbc.Driver
 
 1. Configure application.properties (for test)
 
@@ -216,7 +222,6 @@ Project Name: App
 		spring.datasource.password: rootroot
 		spring.datasource.driver-class-name: com.mysql.jdbc.Driver
 
-1. Create schemas and tables: [MySQL](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/mySQL.md)
 1. We go back to the actual implementation of the DAO class: 
 	1. Add the JdbcTemplate constructor
 	

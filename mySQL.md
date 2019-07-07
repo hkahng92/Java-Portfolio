@@ -45,7 +45,7 @@ In MySQL, physically, a schema is synonymous with a database.
 
 * To rename headers in the result grid we can use `select title "Book Title", isbn "Book ISBN" from book`
 
-* For the condition `where book_id = ?` we can also use logical comparators & boolean operators: `select * from book where book_id < ? or book_id > ?`
+* For the condition `where book_id = ?` we can also use comparators & boolean operators: `select * from book where book_id < ? or book_id > ?`
 
 * In mySQL `<>` represents the "Not Equal" operator.
 
@@ -104,3 +104,5 @@ In MySQL, physically, a schema is synonymous with a database.
 		select employees.first_name, employees.last_name, orders.order_status
 		from northwind.employees left outer join northwind.orders
 		on orders.employee_id = employees.id;
+		
+#### [Go Back](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/README.md)
