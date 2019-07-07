@@ -176,7 +176,20 @@ Project Name: App
 		}
 		
 1. Run the tests, re-factor...
+1. To use JPA DAO in the controller, we simply `@autowired` the Repositories in the controller class to use their methods:
 
+		@Autowired
+		private CustomerRepository customerRepo;
+
+		@Autowired
+		private NoteRepository noteRepo;
+
+		@RequestMapping(value="/customer", method = RequestMethod.POST)
+		public Customer createCustomer(@RequestBody Customer customer) {
+			customerRepo.save(customer);
+			return customer;
+		}
+		
 ### Common Exceptions, and how to handle them
 SSL
 
