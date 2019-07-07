@@ -73,20 +73,20 @@ Project Name: App
 		
 		* Tables: To persist the class to a specific table in DB:
 		
-			@Entity
-			@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-			@Table(name="customer")
-			public class Customer {...
+				@Entity
+				@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+				@Table(name="customer")
+				public class Customer {...
 			
 		`@JsonIgnoreProperties` can include any additional properties that we wish to ignore. For now, it should include `{"hibernateLazyInitializer", "handler"}`
 		
 		* Attributes: `@Id` is used for the property that is going to be the primary key. No annotations is needed for other properties.
 			
-			@Id
-			@GeneratedValue(strategy = GenerationType.AUTO)
-			private Integer id;
-			private String firstName;
-			private String lastName;
+				@Id
+				@GeneratedValue(strategy = GenerationType.AUTO)
+				private Integer id;
+				private String firstName;
+				private String lastName;
 			
 		`@GeneratedValue` is used to auto increment id. `GenerationType.IDENTITY` was found to behave better than `GenerationType.AUTO`.
 		
@@ -94,8 +94,8 @@ Project Name: App
 		
 		We use Sets to define child tables in the Parent class. Then, use the `@OneToMany` to join using the Foriegn key.
 		
-			@OneToMany(mappedBy = "customerId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-			private Set<Note> notes;
+				@OneToMany(mappedBy = "customerId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+				private Set<Note> notes;
 			
 		`cascade = CascadeType.ALL` means changes done to Parent will affect all child entries.
 		`fetch = FetchType.EAGER` means all related child entries will be fetched with the parent. To conserve memory we can use `fetch = FetchType.LAZY`
