@@ -71,24 +71,32 @@ Project Name: App
 			
 	1. Annotate DTO so it can be persisted to the schema: For JPA/Hibernate to automatically create database tables, we have to tell it what our tables should look like.
 		
+		* Tables: To persist the class to a specific table in DB:
+		
 			@Entity
 			@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 			@Table(name="customer")
 			public class Customer {...
 			
-		The previous annotations are used to persist the class to a specific table in DB. `@JsonIgnoreProperties` can include any additional properties that we wish to ignore. For now, it should include `{"hibernateLazyInitializer", "handler"}`
+		`@JsonIgnoreProperties` can include any additional properties that we wish to ignore. For now, it should include `{"hibernateLazyInitializer", "handler"}`
 		
+		* Attributes: `@Id` is used for the property that is going to be the primary key. No annotations is needed for other properties.
+			
 			@Id
 			@GeneratedValue(strategy = GenerationType.AUTO)
 			private Integer id;
+			private String firstName;
+			private String lastName;
 			
-		`@Id` is used for the property that is going to be the primary key. `@GeneratedValue` is used to auto increment id. `GenerationType.IDENTITY` was found to behave better than `GenerationType.AUTO`.
-			
+		`@GeneratedValue` is used to auto increment id. `GenerationType.IDENTITY` was found to behave better than `GenerationType.AUTO`.
+		
+		* Child Tables:
+		
+		We use Sets to define child tables in the Parent class. Then, use the `@OneToMany` to join using the Foriegn key.
+		
 			@OneToMany(mappedBy = "customerId", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 			private Set<Note> notes;
 			
-		We use Sets to define child tables in the Parent class. Then, use the `@OneToMany` to join using the Foriegn key.
-		
 		`cascade = CascadeType.ALL` means changes done to Parent will affect all child entries.
 		`fetch = FetchType.EAGER` means all related child entries will be fetched with the parent. To conserve memory we can use `fetch = FetchType.LAZY`
 	
