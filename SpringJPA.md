@@ -48,27 +48,6 @@ Project Name: App
 			
 1. Creating DTO (models)
 	1. Adding properties, getters, and setters
-	1. Overriding .equals method
-	
-			@Override
-			public boolean equals(Object o) {
-				if (this == o) return true;
-				if (o == null || getClass() != o.getClass()) return false;
-				Car that = (Car) o;
-				return getId() == that.getId() &&
-						Objects.equals(getMake(), that.getMake()) &&
-						Objects.equals(getModel(), that.getModel()) &&
-						Objects.equals(getYear(), that.getYear()) &&
-						Objects.equals(getColor(), that.getColor());
-			}
-	
-	1. Overriding .hashCode method
-	
-			@Override
-			public int hashCode() {
-				return Objects.hash(getId(), getMake(), getModel(), getYear(), getColor());
-			}
-			
 	1. Annotate DTO so it can be persisted to the schema: For JPA/Hibernate to automatically create database tables, we have to tell it what our tables should look like.
 		
 		* Tables: To persist the class to a specific table in DB:
@@ -98,267 +77,104 @@ Project Name: App
 		`cascade = CascadeType.ALL` means changes done to Parent will affect all child entries.
 		`fetch = FetchType.EAGER` means all related child entries will be fetched with the parent. To conserve memory we can use `fetch = FetchType.LAZY`
 	
-1. Creating AppDAO interface: with basic CRUD methods to Create, Read, Update and Delete from the database.
+	1. Overriding .equals method
+	
+			@Override
+			public boolean equals(Object o) {
+				if (this == o) return true;
+				if (o == null || getClass() != o.getClass()) return false;
+				Customer customer = (Customer) o;
+				return Objects.equals(getId(), customer.getId()) &&
+						Objects.equals(getFirstName(), customer.getFirstName()) &&
+						Objects.equals(getLastName(), customer.getLastName()) &&
+						Objects.equals(getCompany(), customer.getCompany()) &&
+						Objects.equals(getPhone(), customer.getPhone()) &&
+						Objects.equals(getNotes(), customer.getNotes());
+			}
+	
+	1. Overriding .hashCode method
+	
+			@Override
+			public int hashCode() {
+				return Objects.hash(getId(), getFirstName(), getLastName(), getCompany(), getPhone(), getNotes());
+			}
+			
+1. Creating [JPA Repository](https://docs.spring.io/spring-data/jpa/docs/current/api/org/springframework/data/jpa/repository/JpaRepository.html): A marker interface with basic CRUD methods included — we do not need to provide an implementation, not even method signatures, for CRUD queries.
 
 	**Example:**
 	
-		public interface CarLotDao {
-			Car getCar(int id);
-			List<Car> getAllCars();
-			List<Car> getCarsByMake(String make);
-			List<Car> getCarsByColor(String color);
-			Car addCar(Car car);
-			void updateCar(Car car);
-			void deleteCar(int id);
+		@Repository
+		public interface CustomerRepository extends JpaRepository<Customer, Integer> {
+			List<Customer> findByLastNameAndCompany(String lastName, String company);
 		}
+	
+	We can add custom query methods by just adding the method definition to the interface, such as `findByLastNameAndCompany`.
+	
+1. Creating unit/integration tests:
+	1. Configure application.properties (for test)
+
+			spring.jpa.hibernate.ddl-auto=create
+			spring.datasource.url=jdbc:mysql://localhost:3306/simple_crm_test?useSSL=false
+			spring.datasource.username=root
+			spring.datasource.password=rootroot
+			spring.jpa.show-sql=true
 			
-1. Implementing the interface: AppDaoJdbcTemplateImpl.java - `implements CarLotDao`
-	1. At this stage, we just override methods in the interface without caring about methods' body.
-	1. Add `@Repository` annotation to the class
-	1. Use the `@Transactional` for multi-query methods.
-1. Creating a test for the interface:
-	1. From the interface file, auto generate a test for all methods and include a `@Before` method
 	1. Add class-level annotations:
-		1. `@RunWith(SpringJUnit4ClassRunner.class)`
-		1. `@SpringBootTest`
-	1. Use `@Autowired` to connect the test with DAO: An example of Dependency Injection
+			
+			@RunWith(SpringRunner.class)
+			@SpringBootTest
+			public class CrmApplicationTests {...
+	
+	1. Use `@Autowired` to connect the test with Repositories
 			
 			@Autowired
-			protected CarLotDao dao;
+			CustomerRepository customerRepo;
+
+			@Autowired
+			NoteRepository noteRepo;
 	
 	1. Add method-level annotations: `@Before`, `@BeforeClass`, and `@Test`
-	1. Design a test implementation for each DAO method. We can also test several DAO methods in one test.
+	1. Design a test implementation for each Repo method.
 	
 	**Example:**
 			
 		@Before
 		public void setUp() throws Exception {
-			// clean out the test db
-			List<Car> carList = dao.getAllCars();
-			for (Car t : carList) {
-				dao.deleteCar(t.getId());
-			}
+			noteRepo.deleteAll();
+			customerRepo.deleteAll();
 		}
 
 		@Test
-		public void addGetDeleteACar() {
-
-			Car car = new Car();
-
-			car.setMake("Honda");
-			car.setModel("Accord");
-			car.setYear("2019");
-			car.setColor("Black");
-
-			car = dao.addCar(car);
-
-			Car car2 = dao.getCar(car.getId());
-
-			assertEquals(car, car2);
-
-			dao.deleteCar(car.getId());
-
-			car2 = dao.getCar(car.getId());
-
-			assertNull(car2);
-		}
-
-		@Test
-		public void updateCar() {
-
-			Car car = new Car();
-
-			car.setMake("Honda");
-			car.setModel("Accord");
-			car.setYear("2019");
-			car.setColor("Black");
-
-			car = dao.addCar(car);
-
-			car.setColor("Red");
-
-			dao.updateCar(car);
-
-			car = dao.getCar(car.getId());
-
-			assertEquals(car.getColor(),"Red");
-		}
-
-		@Test
-		public void getAllCarsAndByMakeAndColor() {
-
-			Car car = new Car();
-
-			car.setMake("Honda");
-			car.setModel("Accord");
-			car.setYear("2019");
-			car.setColor("Black");
-
-			dao.addCar(car);
-
-			car.setMake("Toyota");
-			car.setModel("Highlander");
-			car.setYear("2020");
-			car.setColor("Red");
-
-			dao.addCar(car);
-
-			car.setMake("Toyota");
-			car.setModel("Camry");
-			car.setYear("2015");
-			car.setColor("White");
-
-			dao.addCar(car);
-
-			car.setMake("Kia");
-			car.setModel("Rio");
-			car.setYear("2010");
-			car.setColor("Gray");
-
-			dao.addCar(car);
-
-			car.setMake("Kia");
-			car.setModel("Forte");
-			car.setYear("2019");
-			car.setColor("Black");
-
-			dao.addCar(car);
-
-			List<Car> carList = dao.getAllCars();
-
-			assertEquals(carList.size(), 5);
-
-			carList = dao.getCarsByMake("Toyota");
-
-			assertEquals(carList.size(), 2);
-
-			carList = dao.getCarsByMake("Honda");
-
-			assertEquals(carList.size(), 1);
-
-			carList = dao.getCarsByColor("Black");
-
-			assertEquals(carList.size(), 2);
-
-			carList = dao.getCarsByColor("White");
-
-			assertEquals(carList.size(), 1);
-		}
-	
-
-1. Configure application.properties (for test)
-
-		spring.jpa.hibernate.ddl-auto=create
-		spring.datasource.url=jdbc:mysql://localhost:3306/simple_crm_test?useSSL=false
-		spring.datasource.username=root
-		spring.datasource.password=rootroot
-
-		spring.jpa.show-sql=true
-
-1. We go back to the actual implementation of the DAO class: 
-	1. Add the JdbcTemplate constructor
-	
-		**Example:**
-
-			//Constructor
-			private JdbcTemplate jdbcTemplate;
-
-			@Autowired
-			public CarLotDaoJdbcTemplateImpl(JdbcTemplate newJdbcTemplate){
-				this.jdbcTemplate = newJdbcTemplate;
-			}
-	
-	1. Add a Mapper to the implementation of DAO interface (once per model)
-	
-		**Example:**
-
-			//Mappers (One per Model)
-			private Car mapRowToCar(ResultSet rs, int rowNum) throws SQLException {
-				Car car = new Car();
-				car.setId(rs.getInt("id"));
-				car.setMake(rs.getString("make"));
-				car.setModel(rs.getString("model"));
-				car.setYear(rs.getString("year"));
-				car.setColor(rs.getString("color"));
-
-				return car;
-			}
+		public void createTest() {
 			
-	1. Add Prepared statement strings to the implementation of DAO interface
-	
-		**Example:**
+			Note note = new Note();
+			note.setContent("This is a test note");
+			Set<Note> noteSet = new HashSet<>();
+			noteSet.add(note);
+
+			Note note2 = new Note();
+			note2.setContent("This is the SECOND test note.");
+			noteSet.add(note2);
+
+			Customer customer = new Customer();
+			customer.setFirstName("Joe");
+			customer.setLastName("Smith");
+			customer.setPhone("111-222-3456");
+			customer.setCompany("BigCo");
+			customerRepo.save(customer);
+			note.setCustomerId(customer.getId());
+			note2.setCustomerId(customer.getId());
+
+			noteRepo.save(note);
+			noteRepo.save(note2);
+
+			List<Customer> customerList = customerRepo.findAll();
+			assertEquals(1, customerList.size());
+
+			noteSet =  customerList.get(0).getNotes();
+			assertEquals(2, noteSet.size());
+		}
 		
-			// Prepared statement strings
-			private static final String INSERT_CAR_SQL =
-					"insert into car (make, model, year, color) values (?, ?, ?, ?)";
-
-			private static final String SELECT_CAR_SQL =
-					"select * from car where id = ?";
-
-			private static final String SELECT_ALL_CARS_SQL =
-					"select * from car";
-
-			private static final String DELETE_CAR_SQL =
-					"delete from car where id = ?";
-
-			private static final String UPDATE_CAR_SQL =
-					"update car set make = ?, model = ?, year = ?, color = ? where id = ?";
-
-			private static final String SELECT_CARS_BY_MAKE_SQL =
-					"select * from car where make = ?";
-
-			private static final String SELECT_CARS_BY_COLOR_SQL =
-					"select * from car where color = ?";
-	
-	1. Implementing methods using `jdbcTemplate.query`, `jdbcTemplate.update`, or `jdbcTemplate.queryforObject`
-	
-		**Example:**
-		
-			@Override
-			public Car getCar(int id) {
-				try {
-					return jdbcTemplate.queryForObject(SELECT_CAR_SQL, this::mapRowToCar, id);
-				} catch (EmptyResultDataAccessException e) {
-					// if nothing is returned just catch the exception and return null
-					return null;
-				}
-			}
-
-			@Override
-			public List<Car> getAllCars() {
-				return jdbcTemplate.query(SELECT_ALL_CARS_SQL, this::mapRowToCar);
-			}
-
-			@Override
-			public List<Car> getCarsByMake(String make) {
-				return jdbcTemplate.query(SELECT_CARS_BY_MAKE_SQL, this::mapRowToCar, make);
-			}
-
-			@Override
-			@Transactional
-			public Car addCar(Car car) {
-				jdbcTemplate.update(INSERT_CAR_SQL,
-						car.getMake(), car.getModel(), car.getYear(), car.getColor());
-
-				int id = jdbcTemplate.queryForObject("select last_insert_id()", Integer.class);
-
-				car.setId(id);
-
-				return car;
-			}
-
-			@Override
-			public void updateCar(Car car) {
-				jdbcTemplate.update(UPDATE_CAR_SQL,
-						car.getMake(), car.getModel(), car.getYear(), car.getColor(),
-						car.getId());
-			}
-
-			@Override
-			public void deleteCar(int id) {
-				jdbcTemplate.update(DELETE_CAR_SQL, id);
-			}
-			
 1. Run the tests, re-factor...
 
 ### Common Exceptions, and how to handle them
