@@ -79,28 +79,28 @@ In MySQL, physically, a schema is synonymous with a database.
 
 * Inner join Example:
 
-	select * from northwind.orders inner join northwind.employees on orders.employee_id = employees.id;
+		select * from northwind.orders inner join northwind.employees on orders.employee_id = employees.id;
 
 * Multiple Inner joins:
 
-	select orders.id "Order ID", 
-		customers.id "Customer ID",
-		customers.first_name,
-		customers.last_name,
-		employees.first_name "Employee", 
-		orders.order_status "Status",
-		order_details.product_id "Product id",
-		order_details.unit_price "Price",
-		products.product_name "Product Name"
-	from northwind.orders
-	inner join northwind.employees on  employees.id = orders.employee_id
-	inner join northwind.customers on orders.customer_id = customers.id
-	inner join northwind.order_details on orders.id = order_details.order_id
-	inner join northwind.products on order_details.product_id = products.id
-	where orders.employee_id = 208 and orders.order_status = 'complete';
+		select orders.id "Order ID", 
+			customers.id "Customer ID",
+			customers.first_name,
+			customers.last_name,
+			employees.first_name "Employee", 
+			orders.order_status "Status",
+			order_details.product_id "Product id",
+			order_details.unit_price "Price",
+			products.product_name "Product Name"
+		from northwind.orders
+		inner join northwind.employees on  employees.id = orders.employee_id
+		inner join northwind.customers on orders.customer_id = customers.id
+		inner join northwind.order_details on orders.id = order_details.order_id
+		inner join northwind.products on order_details.product_id = products.id
+		where orders.employee_id = 208 and orders.order_status = 'complete';
 	
 * Outer Left Join:
 
-	select employees.first_name, employees.last_name, orders.order_status
-	from northwind.employees left outer join northwind.orders
-	on orders.employee_id = employees.id;
+		select employees.first_name, employees.last_name, orders.order_status
+		from northwind.employees left outer join northwind.orders
+		on orders.employee_id = employees.id;
