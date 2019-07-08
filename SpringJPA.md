@@ -175,20 +175,23 @@ Project Name: App
 		}
 		
 1. Run the tests, re-factor...
-1. To use JPA DAO in the controller, we simply `@Autowired` the Repositories in the controller class to use their methods:
 
-		@Autowired
-		private CustomerRepository customerRepo;
+### Using JPA Dao in the controller
 
-		@Autowired
-		private NoteRepository noteRepo;
+To use JPA DAO in the controller, we simply `@Autowired` the Repositories in the controller class to use their methods:
 
-		@RequestMapping(value="/customer", method = RequestMethod.POST)
-		public Customer createCustomer(@RequestBody Customer customer) {
-			customerRepo.save(customer);
-			return customer;
-		}
-		
+	@Autowired
+	private CustomerRepository customerRepo;
+
+	@Autowired
+	private NoteRepository noteRepo;
+
+	@RequestMapping(value="/customer", method = RequestMethod.POST)
+	public Customer createCustomer(@RequestBody Customer customer) {
+		customerRepo.save(customer);
+		return customer;
+	}
+	
 ### Common Exceptions, and how to handle them
 
 * Not being able to connect to database
@@ -201,6 +204,7 @@ Project Name: App
 				<artifactId>jaxb-api</artifactId>
 				<version>2.3.0</version>
 			</dependency>
-
+* BeanCreationException
+	* Solution: make sure that custom query methods' definitions are correct
 
 #### [Go Back](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/README.md)

@@ -326,7 +326,19 @@ Project Name: App
 			
 1. Run the tests, re-factor...
 
-### Adding View Models & Service layer
+### Using JDBC Dao in the controller
+
+To use JdbcTemplate DAO in the controller, we simply `@Autowired` the Dao interface in the controller class to use their methods:
+
+		    @Autowired
+			CarLotDao dao;
+
+			@RequestMapping(value = "/carLot", method = RequestMethod.POST)
+			@ResponseStatus(value = HttpStatus.CREATED)
+			public Car createCar(@RequestBody Car car) {
+				car = dao.addCar(car);
+				return car;
+			}
 
 ### Common Exceptions, and how to handle them
 
