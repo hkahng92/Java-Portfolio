@@ -6,11 +6,11 @@ Example used: rec-coll-jdbctemplate-dao
 
 Are object models that are used to present (or take input) data to/from the end user in a form that might be similar or somewhat different than the database structure.
 
-The view model should look exactly like the DTO if we want to present data in a form similar to the database structure, i.e. a class with properties, setters and getters, and equals and hashcode methods overriden.
+* The view model should look exactly like the DTO if we want to present data in a form similar to the database structure, i.e. a class with properties, setters and getters, and with equals and hashcode methods overriden.
 
-In the view model, we can represent relationships to parent tables in DB using composition. For instance, if the Artist is the parent of the Album table, we can have the AlbumViewModel show the Artist object, instead of just showing the artist_id.
+* In the view model, we can represent relationships to parent tables in DB using composition. For instance, if the Artist is the parent of the Album table, we can have the AlbumViewModel show the Artist object, instead of just showing the artist_id.
 
-In the view model, we can also represent relationships to children tables using a list containing the child objects. For instance, we can have the AlbumViewModel show all the Track objects for a given Album inside a list, as shown below.
+* In the view model, we can also represent relationships to children tables using a list containing the child objects. For instance, we can have the AlbumViewModel show all the Track objects for a given Album inside a list, as shown below.
  
 
 	private int id;
