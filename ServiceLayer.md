@@ -196,4 +196,133 @@ The service layer can validate the view model data, apply other business rules/l
 
 ## TDDs
 
+### My personal approach to designing tests
+
+Before we are able to design a test for any method, we need to know three basic information about it:
+
+1. What does it take as input?
+
+1. What does it return as output?
+
+1. How does the method work?
+
+For example, if we are trying to design a test for saveAlbum method in the service layer, the answers would be:
+
+1. The method takes **AlbumViewModel** as input (with all information about the album except for album_id)
+
+1. It should return **AlbumViewModel** as output (with the same information in addition to the album_id)
+
+1. The service method works by deconstructing the AlbumViewModel into the simpler **AlbumDto** form, and then it uses the **albumDao** to send the **AlbumDto** to the Database to be saved. The **albumDao** then returns the **AlbumDto** with album_id after being saved. Finally, the service method uses **buildAlbumViewModel** to reconstruct the **AlbumViewModel** and return it back.
+
+Now, that we have all the information needed to design the test, we approach to actually coding the test. Keep in mind that our ultimate goal is to compare the expected output of the service to the actual one.
+
+**Coding the test:**
+
+1. We first hard-code the viewModel to be used as input.
+1. We then pass the input to the service method to return back the actual output viewModel
+1. We hard-code the expected output viewModel
+1. We compare the actual with the expected output 
+
+Final test should look like this:
+
+	@Test
+    public void saveAlbum() {
+	
+		// 1. Hardcoding the input viewModel	
+        AlbumViewModel avm = new AlbumViewModel();
+
+        avm.setListPrice(new BigDecimal("14.99"));
+        avm.setReleaseDate(LocalDate.of(1999, 05, 15));
+        avm.setTitle("Greatest Hits");
+
+        Artist artist = new Artist();
+        artist.setInstagram("@RockStar");
+        artist.setName("The GOAT");
+        artist.setTwitter("@TheRockStar");
+        artist = service.saveArtist(artist);
+
+        avm.setArtist(artist);
+
+        Label label = new Label();
+        label.setName("Blue Note");
+        label.setWebsite("www.bluenote.com");
+        label = service.saveLabel(label);
+
+        avm.setLabel(label);
+
+        Track track = new Track();
+        track.setRunTime(180);
+        track.setTitle("Number 1 Hit!");
+        List<Track> tList = new ArrayList<>();
+        tList.add(track);
+
+        avm.setTracks(tList);
+
+		//2. Actual Output
+        AlbumViewModel fromService = service.saveAlbum(avm); 
+		
+		//3. Expected Output
+		avm.setAlbumId(1) 
+
+        assertEquals(avm, fromService);
+    }
+
+1. Separately, we [mock](#mocks) the albumDao
+1. We also need to instantiate the DAOs and service layer in the @Before Setup() method:
+		
+		ServiceLayer service;
+		AlbumDao albumDao;
+		ArtistDao artistDao;
+		LabelDao labelDao;
+		TrackDao trackDao;
+
+		@Before
+		public void setUp() throws Exception {
+			setUpAlbumDaoMock();
+			setUpArtistDaoMock();
+			setUpLabelDaoMock();
+			setUpTrackDaoMock();
+
+			service = new ServiceLayer(albumDao, artistDao, labelDao, trackDao);
+		}
+
 ### Mocks 
+
+Refering back to how the SaveAlbum method works, 
+
+	The service method works by deconstructing the AlbumViewModel into the simpler **AlbumDto** form, and then it uses the **albumDao** to send the **AlbumDto** to the Database to be saved. The **albumDao** then returns the **AlbumDto** with album_id after being saved. Finally, the service method uses **buildAlbumViewModel** to reconstruct the **AlbumViewModel** and return it back.
+
+We realize that our ServiceLayer test result will have relience on whether the albumDao is working correctly or not. What if we don't have the Dao designed yet?! And what if the serviceLayer method is dependent on an external service that we don't have access to, yet?! And that's why we use mocks, to guarantee that the result of our ServiceLayer tests is solely dependent on the performance of the serviceLayer itself.
+
+#### How to mock the DAO?
+
+1. Declare the mock `albumDao = mock(AlbumDaoJdbcTemplateImpl.class);` 
+1. Hard-code the **output DTO**
+1. Hard-code the **input DTO**
+1. Let the mock know to return **output DTO** when **input DTO** is passed to the **DAO** 
+1. Final code:
+
+		private void setUpAlbumDaoMock() {
+			albumDao = mock(AlbumDaoJdbcTemplateImpl.class);
+			// 1. Hard-coded output DTO
+			Album album = new Album();
+			album.setId(1);
+			album.setArtistId(45);
+			album.setLabelId(10);
+			album.setTitle("Greatest Hits");
+			album.setListPrice(new BigDecimal("14.99"));
+			album.setReleaseDate(LocalDate.of(1999, 05, 15));
+
+			// 2. Hard-coded input DTO
+			Album album2 = new Album();
+			album2.setArtistId(45);
+			album2.setLabelId(10);
+			album2.setTitle("Greatest Hits");
+			album2.setListPrice(new BigDecimal("14.99"));
+			album2.setReleaseDate(LocalDate.of(1999, 05, 15));
+
+			// 3. Return output DTO when input is passed through albumDao
+			doReturn(album).when(albumDao).addAlbum(album2);
+		}
+		
+Note: For the mock to work, we need to make sure that information used to hard-code **input** and **output DTOs** are exactly the same used for hard-coding **input ViewModel** and **Output ViewModel**, i.e. the same album_id, artist_id, etc. 
