@@ -91,9 +91,9 @@ The service layer can validate the view model data, apply other business rules/l
 	
 	**Note: this step should be done in parallel with step 5**
 	
-	** Important: to saveAlbum, we need to make sure that parents, Labels and Artists in this case, are created first.**
+	**Important: to saveAlbum, we need to make sure that parents, Labels and Artists in this case, are created first.**
 
-	** Important: to removeAlbum, we need to make sure that all child Tracks are removed first.**
+	**Important: to removeAlbum, we need to make sure that all child Tracks are removed first.**
 
 		//
 		// Album API
