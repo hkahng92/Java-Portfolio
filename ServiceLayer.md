@@ -11,29 +11,28 @@ Are object models that are used to present (or take input) data to/from the end 
 * In the view model, we can represent relationships to parent tables in DB using composition. For instance, if the Artist is the parent of the Album table, we can have the AlbumViewModel show the Artist object, instead of just showing the artist_id.
 
 * In the view model, we can also represent relationships to children tables using a list containing the child objects. For instance, we can have the AlbumViewModel show all the Track objects for a given Album inside a list, as shown below.
- 
 
-	private int id;
-    private String title;
-    private LocalDate releaseDate;
-    private BigDecimal listPrice;
+		private int id;
+		private String title;
+		private LocalDate releaseDate;
+		private BigDecimal listPrice;
 
-	//Parents
-    private Artist artist;
-    private Label label;
-    
-	//Children
-	private List<Track> tracks;
-	
-	//Getters and Setters
-	.
-	.
-	.
-	
-	//equals and hashCode methods
-	.
-	.
-	.
+		//Parents
+		private Artist artist;
+		private Label label;
+		
+		//Children
+		private List<Track> tracks;
+		
+		//Getters and Setters
+		.
+		.
+		.
+		
+		//equals and hashCode methods
+		.
+		.
+		.
 
 **Note:** equals and hashCode methods can be auto-generated using `alt+insert` in windows, then selecting `equals() and hashCode()` from the dropdown menu.
  
