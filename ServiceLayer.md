@@ -34,7 +34,7 @@ Are object models that are used to present (or take input) data to/from the end 
 		.
 		.
 
-**Note:** equals and hashCode methods can be auto-generated using `alt+insert` in windows, then selecting `equals() and hashCode()` from the dropdown menu.
+**Note:** equals and hashCode methods can be auto-generated in windows using `alt+insert`, then selecting `equals() and hashCode()` from the dropdown menu.
  
 ## Service Layer
 
@@ -58,7 +58,7 @@ The service layer can validate the view model data, apply other business rules/l
 			this.trackDao = trackDao;
 		}
 
-1. Add Helper Methods to build the ViewModel: Methods that constructs the view model object and returns it
+1. Add Helper Methods that will build the ViewModels: methods that constructs the view model object and returns it
 
 		
 		private AlbumViewModel buildAlbumViewModel(Album album) {
@@ -89,7 +89,11 @@ The service layer can validate the view model data, apply other business rules/l
 	
 1. Implement ServiceLayer Methods: Idealy, one method for each request method in the .yaml file.
 	
-	**This step should be done in parallel with step 5**
+	**Note: this step should be done in parallel with step 5**
+	
+	** Important: to saveAlbum, we need to make sure that parents, Labels and Artists in this case, are created first.**
+
+	** Important: to removeAlbum, we need to make sure that all child Tracks are removed first.**
 
 		//
 		// Album API
@@ -188,7 +192,7 @@ The service layer can validate the view model data, apply other business rules/l
 
 		}
 
-1. test serviceLayer methods using [TDDs](## TDDs).
+1. test serviceLayer methods using [TDDs](#TDDs).
 
 ## TDDs
 
