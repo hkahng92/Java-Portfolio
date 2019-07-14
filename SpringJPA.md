@@ -3,12 +3,11 @@
 ### Spring Initializer Dependencies
 
 * Spring Web Starter
+* Spring HATEOAS
 * Spring Data JPA
 * MySQL Driver
 
 ### Spring Project Compostion
-
-Project Name: App
 
 * main.java.com.company.artifactName
 	* controller

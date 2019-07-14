@@ -3,12 +3,11 @@
 ### Spring Initializer Dependencies
 
 * Spring Web Starter
+* Spring HATEOAS
 * JDBC API
 * MySQL Driver
 
 ### Spring Project Compostion
-
-Project Name: App
 
 * main.java.com.company.artifactName
 	* controller
@@ -31,7 +30,7 @@ Project Name: App
 ### **Check list - Using Car Lot project example**
 
 1. Project Creation
-	1. Create project with Spring Initializr. Include web, mysql, jdbc
+	1. Create project with Spring Initializr. Include web, mysql, jdbc, and Hateoas
 	1. Create schema and run db creation script with MySQL Workbench: [MySQL](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/mySQL.md)
 1. Configuration
 	1. Configure the Pom.xml file by adding `<version>5.1.46</version>` to SQL dependency
@@ -339,6 +338,8 @@ To use JdbcTemplate DAO in the controller, we simply `@Autowired` the Dao interf
 				car = dao.addCar(car);
 				return car;
 			}
+
+### [Service Layer]()
 
 ### Common Exceptions, and how to handle them
 

@@ -41,7 +41,7 @@ In MySQL, a schema is synonymous with a database.
 
 #### Notes:
 
-* Instead of `select *` we can specify which columns to be rendered by using `select title, isbn from book`
+* Instead of `select * from book` we can specify which columns to be rendered by using `select title, isbn from book`
 
 * To rename headers in the result grid we can use `select title "Book Title", isbn "Book ISBN" from book`
 
