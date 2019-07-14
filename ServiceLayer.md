@@ -4,7 +4,7 @@ Example used: rec-coll-jdbctemplate-dao
 
 ## View Models
 
-Are object models that are used to present (or take input) data to/from the end user in a form that might be similar or somewhat different than the database structure.
+View Models are object models that are used to present (or take input) data to/from the end user in a form that might be similar or somewhat different than the database structure.
 
 * The view model should look exactly like the DTO if we want to present data in a form similar to the database structure, i.e. a class with properties, setters and getters, and with equals and hashcode methods overriden.
 
