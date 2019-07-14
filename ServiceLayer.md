@@ -326,3 +326,5 @@ We realize that our ServiceLayer test result will have relience on whether the a
 		}
 		
 Note: For the mock to work, we need to make sure that information used to hard-code **input** and **output DTOs** are exactly the same used for hard-coding **input ViewModel** and **Output ViewModel**, i.e. the same album_id, artist_id, etc. 
+
+*The same approch could be used to design DAO TDDs, except that we wouldn't need to worry about having mocks.*
