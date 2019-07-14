@@ -339,7 +339,7 @@ To use JdbcTemplate DAO in the controller, we simply `@Autowired` the Dao interf
 				return car;
 			}
 
-### [Service Layer]()
+### [Service Layer](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/ServiceLayer.md)
 
 ### Common Exceptions, and how to handle them
 
