@@ -329,7 +329,10 @@ Now, that we have all the information needed to design the test, we approach the
 
 Refering back to how the SaveAlbum method works:
 
-The service method works by deconstructing the AlbumViewModel into the simpler **AlbumDto** form, and then it uses the **albumDao** to send the **AlbumDto** to the Database to be saved. The **albumDao** then returns the **AlbumDto** with album_id after being saved. Finally, the service method uses **buildAlbumViewModel** to reconstruct the **AlbumViewModel** and return it back.
+	1. The service method works by deconstructing the **input AlbumViewModel** into the simpler **AlbumDto** form.
+	1. It uses the **albumDao** to send the **input AlbumDto** to the Database to be saved.
+	1. The **albumDao** then returns the **output AlbumDto** with album_id after being saved.
+	1. Finally, the service method uses **buildAlbumViewModel** to reconstruct the **output AlbumViewModel** and return it back.
 
 We realize that our ServiceLayer test result will have relience on whether the albumDao is working correctly or not. What if we don't have the Dao designed yet?! And what if the serviceLayer method is dependent on an external service that we don't have access to, yet?! And that's why we use mocks, to guarantee that the result of our ServiceLayer tests is solely dependent on the performance of the serviceLayer itself.
 
