@@ -345,8 +345,10 @@ We realize that our ServiceLayer test result will have relience on whether the a
 1. Final code:
 
 		private void setUpAlbumDaoMock() {
+			// 1. 
 			albumDao = mock(AlbumDaoJdbcTemplateImpl.class);
-			// 1. Hard-coded output DTO
+			
+			// 2. Hard-coded output DTO
 			Album album = new Album();
 			album.setId(1);
 			album.setArtistId(45);
@@ -355,7 +357,7 @@ We realize that our ServiceLayer test result will have relience on whether the a
 			album.setListPrice(new BigDecimal("14.99"));
 			album.setReleaseDate(LocalDate.of(1999, 05, 15));
 
-			// 2. Hard-coded input DTO
+			// 3. Hard-coded input DTO
 			Album album2 = new Album();
 			album2.setArtistId(45);
 			album2.setLabelId(10);
@@ -363,10 +365,10 @@ We realize that our ServiceLayer test result will have relience on whether the a
 			album2.setListPrice(new BigDecimal("14.99"));
 			album2.setReleaseDate(LocalDate.of(1999, 05, 15));
 
-			// 3. Return output DTO when input is passed through albumDao
+			// 4. Return output DTO when input is passed through albumDao
 			doReturn(album).when(albumDao).addAlbum(album2);
 		}
 		
-Note: For the mock to work, we need to make sure that information used to hard-code **input** and **output DTOs** are exactly the same used for hard-coding **input ViewModel** and **Output ViewModel**, i.e. the same album_id, artist_id, etc. 
+**Note:** For the mock to work, we need to make sure that information used to hard-code **input** and **output DTOs** are exactly the same used for hard-coding **input ViewModel** and **Output ViewModel**, i.e. the same album_id, artist_id, etc. 
 
 *The same approch could be used to design DAO TDDs, except that we wouldn't need to worry about having mocks.*
