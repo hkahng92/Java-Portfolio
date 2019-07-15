@@ -373,3 +373,24 @@ We realize that our ServiceLayer test result will have relience on whether the a
 **Note:** For the mock to work, we need to make sure that information used to hard-code **input** and **output DTOs** are exactly the same used for hard-coding **input ViewModel** and **Output ViewModel**, i.e. the same album_id, artist_id, etc. 
 
 *The same approch could be used to design DAO TDDs, except that we wouldn't need to worry about having mocks.*
+
+### Using ServiceLayer in the controller
+
+To use the ServiceLayer in the controller, we simply `@Autowired` the serviceLayer in the controller class to use its methods:
+
+	@Autowired
+    ServiceLayer serviceLayer;
+
+    @PostMapping
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
+    public AlbumViewModel createAlbum(@RequestBody @Valid AlbumViewModel albumViewModel){
+        return serviceLayer.saveAlbum(albumViewModel);
+    }
+
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public AlbumViewModel getAlbum(@PathVariable("id") int albumId){
+        return serviceLayer.findAlbum(albumId);
+    }
+
+#### [Go Back](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/README.md)
