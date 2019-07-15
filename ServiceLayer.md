@@ -342,7 +342,8 @@ We realize that our ServiceLayer test result will have relience on whether the a
 1. Hard-code the **output DTO**
 1. Hard-code the **input DTO**
 1. Let the mock know to return **output DTO** when **input DTO** is passed to the **DAO** 
-1. Final code:
+
+	Final code:
 
 		private void setUpAlbumDaoMock() {
 			// 1. 
