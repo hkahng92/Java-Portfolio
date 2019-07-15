@@ -235,9 +235,9 @@ The service layer can validate the view model data, apply other business rules/l
 
 ## TDDs
 
-### My personal approach to designing tests
+### My personal approach to designing TDDs
 
-Before we are able to design a test for any method, we need to know three basic information about it:
+Before we are able to design a test for any method, we need to know three basic information about the method:
 
 1. What does it take as input?
 
@@ -251,9 +251,9 @@ For example, if we are trying to design a test for saveAlbum method in the servi
 
 1. It should return **AlbumViewModel** as output (with the same information in addition to the album_id)
 
-1. The service method works by deconstructing the AlbumViewModel into the simpler **AlbumDto** form, and then it uses the **albumDao** to send the **AlbumDto** to the Database to be saved. The **albumDao** then returns the **AlbumDto** with album_id after being saved. Finally, the service method uses **buildAlbumViewModel** to reconstruct the **AlbumViewModel** and return it back.
+1. The service method works by deconstructing the AlbumViewModel into the simpler **AlbumDto** form, and then it uses the **albumDao** to send the **AlbumDto** to the Database to be saved. After being saved in DB, the **albumDao** then returns the **AlbumDto** with album_id. Finally, the service method uses **buildAlbumViewModel** to reconstruct the **AlbumViewModel** and returns it back.
 
-Now, that we have all the information needed to design the test, we approach to actually coding the test. Keep in mind that our ultimate goal is to compare the expected output of the service to the actual one.
+Now, that we have all the information needed to design the test, we approach the actual coding of the test. Keep in mind that our ultimate goal is to compare the expected output of the service to the actual one using `assertEquals` or `assertNull`, depending on the situation.
 
 **Coding the test:**
 
