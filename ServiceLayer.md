@@ -262,51 +262,51 @@ Now, that we have all the information needed to design the test, we approach the
 1. We hard-code the **expected output viewModel**
 1. We compare the actual with the expected output 
 
-Final test should look like this:
+	Final test should look like this:
 
-	@Test
-    public void saveAlbum() {
-	
-	// 1. Hardcoding the input viewModel	
-        AlbumViewModel avm = new AlbumViewModel();
-
-        avm.setListPrice(new BigDecimal("14.99"));
-        avm.setReleaseDate(LocalDate.of(1999, 05, 15));
-        avm.setTitle("Greatest Hits");
-
-        Artist artist = new Artist();
-        artist.setInstagram("@RockStar");
-        artist.setName("The GOAT");
-        artist.setTwitter("@TheRockStar");
-        artist = service.saveArtist(artist);
-
-        avm.setArtist(artist);
-
-        Label label = new Label();
-        label.setName("Blue Note");
-        label.setWebsite("www.bluenote.com");
-        label = service.saveLabel(label);
-
-        avm.setLabel(label);
-
-        Track track = new Track();
-        track.setRunTime(180);
-        track.setTitle("Number 1 Hit!");
-        List<Track> tList = new ArrayList<>();
-        tList.add(track);
-
-        avm.setTracks(tList);
-
-	//2. Actual Output
-        AlbumViewModel fromService = service.saveAlbum(avm); 
+		@Test
+		public void saveAlbum() {
 		
-	//3. Expected Output
-		avm.setAlbumId(1) 
+		// 1. Hardcoding the input viewModel	
+			AlbumViewModel avm = new AlbumViewModel();
 
-        assertEquals(avm, fromService);
-    }
+			avm.setListPrice(new BigDecimal("14.99"));
+			avm.setReleaseDate(LocalDate.of(1999, 05, 15));
+			avm.setTitle("Greatest Hits");
 
-1. Separately, we [mock](#mocks) the albumDao
+			Artist artist = new Artist();
+			artist.setInstagram("@RockStar");
+			artist.setName("The GOAT");
+			artist.setTwitter("@TheRockStar");
+			artist = service.saveArtist(artist);
+
+			avm.setArtist(artist);
+
+			Label label = new Label();
+			label.setName("Blue Note");
+			label.setWebsite("www.bluenote.com");
+			label = service.saveLabel(label);
+
+			avm.setLabel(label);
+
+			Track track = new Track();
+			track.setRunTime(180);
+			track.setTitle("Number 1 Hit!");
+			List<Track> tList = new ArrayList<>();
+			tList.add(track);
+
+			avm.setTracks(tList);
+
+		//2. Actual Output
+			AlbumViewModel fromService = service.saveAlbum(avm); 
+			
+		//3. Expected Output
+			avm.setAlbumId(1) 
+
+			assertEquals(avm, fromService);
+		}
+
+1. Separately, we need to [mock](#mocks) the albumDao
 1. We also need to instantiate the DAOs and service layer in the @Before Setup() method:
 		
 		ServiceLayer service;
