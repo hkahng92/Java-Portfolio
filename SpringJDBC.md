@@ -18,6 +18,10 @@
 	* dao - Contains Data Access Objects [DAO]
 		* AppDao`<Interface>`
 		* AppDaoJdbcTemplateImpl `<Class>`
+	* service
+		* ServiceLayer `<Class>` - Business Rules usually applied here
+	* viewmodel
+		*AppViewModel `<Class>`
 	* AppApplication `<Class>` - used to run Service
 * main.resources
 	* application.properties - used to setup DB connection

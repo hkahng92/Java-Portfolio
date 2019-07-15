@@ -5,6 +5,7 @@
   * #### [Spring Boot](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/Spring.md)
 	* #### [Spring JDBC](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/SpringJDBC.md)
 	* #### [Spring JPA](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/SpringJPA.md)
+	* #### [View Models, Service layer & TDDs](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/ServiceLayer.md)
   * #### [MySQL](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/mySQL.md)
 	
 ## BASH:
