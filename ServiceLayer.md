@@ -257,9 +257,9 @@ Now, that we have all the information needed to design the test, we approach the
 
 **Coding the test:**
 
-1. We first hard-code the viewModel to be used as input.
-1. We then pass the input to the service method to return back the actual output viewModel
-1. We hard-code the expected output viewModel
+1. We first hard-code the **input viewModel**.
+1. We then pass the input to the service method to return back the **actual output viewModel**
+1. We hard-code the **expected output viewModel**
 1. We compare the actual with the expected output 
 
 Final test should look like this:
@@ -267,7 +267,7 @@ Final test should look like this:
 	@Test
     public void saveAlbum() {
 	
-		// 1. Hardcoding the input viewModel	
+	// 1. Hardcoding the input viewModel	
         AlbumViewModel avm = new AlbumViewModel();
 
         avm.setListPrice(new BigDecimal("14.99"));
@@ -297,10 +297,10 @@ Final test should look like this:
 
         avm.setTracks(tList);
 
-		//2. Actual Output
+	//2. Actual Output
         AlbumViewModel fromService = service.saveAlbum(avm); 
 		
-		//3. Expected Output
+	//3. Expected Output
 		avm.setAlbumId(1) 
 
         assertEquals(avm, fromService);
