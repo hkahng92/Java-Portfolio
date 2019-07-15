@@ -34,6 +34,46 @@ View Models are object models that are used to present (or take input) data to/f
 		.
 		.
 
+### DTO Output Example
+
+	{
+    "id": 1,
+    "title": "Album",
+    "releaseDate": "2019-12-10",
+    "listPrice": 5.52,
+    "artistId": "1",
+    "labelId": "1"
+	}
+	
+### View Model Output Example
+	
+	{
+    "id": 1,
+    "title": "Album",
+    "releaseDate": "2019-12-10",
+    "listPrice": 5.52,
+    "artist": {
+        "id": 1,
+        "name": "Ahmed",
+        "instagram": "Insta",
+        "twitter": "Twitt"
+		},
+    "label": {
+        "id": 1,
+        "name": "labnaem",
+        "website": "www"
+		},
+    "tracks": [
+			{
+            "id": 1,
+            "albumId": 1,
+            "title": "track1",
+            "runTime": 5
+			}
+		]
+	}
+
+
 **Note:** equals and hashCode methods can be auto-generated in windows using `alt+insert`, then selecting `equals() and hashCode()` from the dropdown menu.
  
 ## Service Layer
