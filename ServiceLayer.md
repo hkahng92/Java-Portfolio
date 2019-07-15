@@ -327,9 +327,9 @@ Now, that we have all the information needed to design the test, we approach the
 
 ### Mocks 
 
-Refering back to how the SaveAlbum method works, 
+Refering back to how the SaveAlbum method works:
 
-`The service method works by deconstructing the AlbumViewModel into the simpler **AlbumDto** form, and then it uses the **albumDao** to send the **AlbumDto** to the Database to be saved. The **albumDao** then returns the **AlbumDto** with album_id after being saved. Finally, the service method uses **buildAlbumViewModel** to reconstruct the **AlbumViewModel** and return it back.`
+The service method works by deconstructing the AlbumViewModel into the simpler **AlbumDto** form, and then it uses the **albumDao** to send the **AlbumDto** to the Database to be saved. The **albumDao** then returns the **AlbumDto** with album_id after being saved. Finally, the service method uses **buildAlbumViewModel** to reconstruct the **AlbumViewModel** and return it back.
 
 We realize that our ServiceLayer test result will have relience on whether the albumDao is working correctly or not. What if we don't have the Dao designed yet?! And what if the serviceLayer method is dependent on an external service that we don't have access to, yet?! And that's why we use mocks, to guarantee that the result of our ServiceLayer tests is solely dependent on the performance of the serviceLayer itself.
 
