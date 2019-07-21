@@ -22,7 +22,6 @@
 			public static void main(String[] args) {
 				SpringApplication.run(AhmedElMallahCloudConfigServerApplication.class, args);
 			}
-
 		}
 
 1. Define the config-server port and url for Github in the `application.properties` file.
@@ -33,6 +32,52 @@
 1. Run the server
 
 ### How to use configuration server?
+
+To create a client microservice that utlilizes the configuration server we need to follow the following steps:
+
+1. Create a new IntelliJ project for the configuration server using Spring Initializr (start.spring.io)
+	1. Name it `app-config-service`
+	1. Use `Config client`, `Spring Boot Actuator`, and `Spring Web Starter` dependencies
+1. Add the `@EnableDiscoveryClient` annotation to the main project class.
+		
+		@SpringBootApplication
+		@EnableDiscoveryClient
+		public class AhmedElMallahMagicEightBallServiceApplication {
+
+			public static void main(String[] args) {
+				SpringApplication.run(AhmedElMallahMagicEightBallServiceApplication.class, args);
+			}
+		}
+1. Add `service-name.properties` file to the GitHub repository.
+	1. Include server port, refresh scope configuration, and any other properties we would need to configure the service
+
+			# this is the port on which our random-greeting-service will run
+			server.port=3344
+
+			# allow for RefreshScope
+			management.endpoints.web.exposure.include=*
+ 
+1. Add `bootstrap.properties` file to the resources folder
+	1. include the config server uri
+	1. include the service name (**Must match the properties file name in Github**)
+	
+			# This file has just enough information so that our application can find the configuration
+			# service and its configuration settings.
+
+			# This name must match the name of the properties file for this application
+			# in the configuration repository. we are looking for a file called hello-cloud-config.properties
+			spring.application.name=magic-eight-ball-service
+
+			# This is the url to the configuration service that we will use to get our configuration
+			spring.cloud.config.uri=http://localhost:9999
+
+1. Add `@RefreshScope` to the controller class using the service
+1. To extract predefined variables from the properties file we can use: 
+		
+		@Value("${officialGreeting}")
+		private String officialGreeting;
+
+1. Run the server 
 
 ## Service Registry
 
