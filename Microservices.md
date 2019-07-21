@@ -130,20 +130,17 @@ This tutorial steps you through setting up a Eureka Service Registry and the cre
 
 	**The Config Server matches properties files to their respective services by name: the name of the configuration file must match the application name**
 
-		```java
 		# this is the port on which our random-greeting-service will run
 		server.port=2121
 
 		# allow for RefreshScope
 		management.endpoints.web.exposure.include=*
-		```
 		
 	**As indicated by the comments, our service (random-greeting-service) will run on port 2121 (this value is arbitrary). The next entry is needed to enable us to force our service to re-read its configuration without having to restart**
 
 1. Configure the Service to Use the Config Server
 	1. Create a file called ```src/main/resources/bootstrap.properties``` in the project and add the following entries:
 
-			```java
 			# This file has just enough information so that our application can find the configuration
 			# service and its configuration settings.
 
@@ -153,14 +150,12 @@ This tutorial steps you through setting up a Eureka Service Registry and the cre
 
 			# This is the url to the configuration service that we will use to get our configuration
 			spring.cloud.config.uri=http://localhost:9999
-			```
 
 	**The ```spring.application.name``` property value must match the name of the properties file we checked into Git.**
 	**The host and port we use for the ```spring.cloud.config.uri``` must match the host and port values on which our Config Server is running**
 	
 1. Create the Controller
 
-		```java
 		@RestController
 		@RefreshScope
 		public class RandomGreetingServiceController {
@@ -169,12 +164,10 @@ This tutorial steps you through setting up a Eureka Service Registry and the cre
 			.
 			.
 		}
-		```
 
 1. Configure Random Greeting Service to Register with Eureka
 	1. Add the  ```@EnbleDiscoveryClient``` class level annotation to the main application class.
 			
-			```java
 			@SpringBootApplication
 			@EnableDiscoveryClient
 			public class RandomGreetingServiceApplication {
@@ -183,7 +176,6 @@ This tutorial steps you through setting up a Eureka Service Registry and the cre
 					SpringApplication.run(RandomGreetingServiceApplication.class, args);
 				}
 			}
-			```
 
 ### Step 3: Modify the Hello Cloud Service
 
