@@ -84,7 +84,7 @@ This tutorial steps you through setting up a Eureka Service Registry and the cre
 
 ### System Design
 
-![image-20190620233725325](../images/hello-cloud-system-v2.png)
+![image-20190620233725325](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/images/hello-cloud-system-v2.png)
 
 * Service 1 is a REST web service that uses Config Server for its configuration files. 
 * Service 1 registers with the Service Registry when it starts up.
@@ -146,7 +146,7 @@ This tutorial steps you through setting up a Eureka Service Registry and the cre
 
 			# This name must match the name of the properties file for this application
 			# in the configuration repository. we are looking for a file called hello-cloud-config.properties
-			spring.application.name=random-greeting-service
+			spring.application.name=service1-name-service
 
 			# This is the url to the configuration service that we will use to get our configuration
 			spring.cloud.config.uri=http://localhost:9999
@@ -177,123 +177,89 @@ This tutorial steps you through setting up a Eureka Service Registry and the cre
 				}
 			}
 
-### Step 3: Modify the Hello Cloud Service
+### Creating Service 2 that utitlizes Service 1 registered with Service Registry
 
-Now we want to modify the Hello Cloud Service to use the Random Greeting Service rather than its configuration file as the source of its "hello" message. We'll do that in three steps:
+1. Add Eureka Client Dependency or manually add the following to an existing project POM.xml file
 
-1. Add the Eureka client dependency to our POM file.
-2. Add the ```@EnableDiscoveryClient``` annotation to our main application class.
-3. Modify the ```hello-cloud-service.properties``` file.
-4. Modify the Controller to call the Random Greeting Service.
-
-#### 3.1: Add Eureka Client Dependency
-
-Open the ```pom.xml``` file and add the following dependency:
-
-```xml
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
 		</dependency>
 
-```
+1. Add ```@EnableDiscoveryClient``` class level annotation to the main application class.
 
-#### 3.2: Add ```@EnableDiscoveryClient``` Annotation
+	**Add this annotation does the following:**
 
-Open ```com.trilogyed.hellocloudservice.HelloCloudServiceApplication.java``` and add the ```@EnableDiscoveryClient``` class level annotation. Your code should look like this:
+	1. Causes the Hello Cloud Service to register with the Eureka Service registry upon startup.
+	1. Allows the Hello Cloud Service to contact the Eureka Service Registry to lookup the Random Greeting Service location and connection information.
 
-```java
-@SpringBootApplication
-@EnableDiscoveryClient
-public class HelloCloudServiceApplication {
+1. Add Configuration Entries to the ```service2-name-service.properties``` file. 
 
-	public static void main(String[] args) {
-		SpringApplication.run(HelloCloudServiceApplication.class, args);
-	}
-}
-```
+		server.port=7979
 
-Add this annotation does the following:
+		# allow for RefreshScope
+		management.endpoints.web.exposure.include=*
 
-1. Causes the Hello Cloud Service to register with the Eureka Service registry upon startup.
-2. Allows the Hello Cloud Service to contact the Eureka Service Registry to lookup the Random Greeting Service location and connection information.
+		officialGreeting="Greetings from the Hello Cloud Service!!! We're glad you're here!"
 
-#### 3.3: Add Configuration Entries
+		randomGreetingServiceName=service1-name-service
+		serviceProtocol=http://
+		servicePath=/greeting
 
-Now we'll add some configuration entries to the ```hello-cloud-service.properties``` file. Modify your file so it looks like this:
+	The new entries will help us locate and call Service 1.
 
-```java
-server.port=7979
+1. Create Controller
 
-# allow for RefreshScope
-management.endpoints.web.exposure.include=*
+		@RestController
+		@RefreshScope
+		public class HelloCloudServiceController {
 
-officialGreeting="Greetings from the Hello Cloud Service!!! We're glad you're here!"
+			@Autowired
+			private DiscoveryClient discoveryClient;
 
-randomGreetingServiceName=random-greeting-service
-serviceProtocol=http://
-servicePath=/greeting
-```
+			private RestTemplate restTemplate = new RestTemplate();
 
-The new entries will help us locate and call the Random Greeting Service.
+			@Value("${randomGreetingServiceName}")
+			private String randomGreetingServiceName;
 
-#### 3.4: Modify Controller
+			@Value("${serviceProtocol}")
+			private String serviceProtocol;
 
-Finally, we will modify the Controller to use the Random Greeting Service. Open ```com.trilogyed.hellocloudservice.controller.HelloCloudServiceController.java``` modify the class so it looks like this:
+			@Value("${servicePath}")
+			private String servicePath;
 
-```java
-@RestController
-@RefreshScope
-public class HelloCloudServiceController {
+			@Value("${officialGreeting}")
+			private String officialGreeting;
 
-    @Autowired
-    private DiscoveryClient discoveryClient;
+			@RequestMapping(value="/hello", method = RequestMethod.GET)
+			public String helloCloud() {
 
-    private RestTemplate restTemplate = new RestTemplate();
+				List<ServiceInstance> instances = discoveryClient.getInstances(randomGreetingServiceName);
 
-    @Value("${randomGreetingServiceName}")
-    private String randomGreetingServiceName;
+				String randomGreetingServiceUri = serviceProtocol + instances.get(0).getHost() + ":" + instances.get(0).getPort() + servicePath;
 
-    @Value("${serviceProtocol}")
-    private String serviceProtocol;
+				String greeting = restTemplate.getForObject(randomGreetingServiceUri, String.class);
 
-    @Value("${servicePath}")
-    private String servicePath;
+				return greeting;
+			}
+		}
 
-    @Value("${officialGreeting}")
-    private String officialGreeting;
 
-    @RequestMapping(value="/hello", method = RequestMethod.GET)
-    public String helloCloud() {
+	Things to note about this code:
 
-        List<ServiceInstance> instances = discoveryClient.getInstances(randomGreetingServiceName);
-
-        String randomGreetingServiceUri = serviceProtocol + instances.get(0).getHost() + ":" + instances.get(0).getPort() + servicePath;
-
-        String greeting = restTemplate.getForObject(randomGreetingServiceUri, String.class);
-
-        return greeting;
-    }
-}
-```
-
-Things to note about this code:
-
-1. We autowire a DiscoveryClient instance. We'll use this to contact Eureka and ask about the connection details of the Random Greeting Service.
-2. We include a RestTemplate property. This will used to communicate with the Random Greeting Service. It allows us to make REST calls from our Java code.
-3. We use the ```@Value``` annotation to get the values of the randomGreetingServiceName, serviceProtocol, and servicePath properties in our config file.
-4. ```helloCloud``` Method:
-   1. We use the DiscoveryClient to ask for the Random Greeting Service by name.
-   2. We combine the serviceProtocol and servicePath from our configuration file with the host and port of the Random Greeting Service from Eureka to create the URI for the Random Greeting Service.
-   3. We use the restTemplate and the URI to call the Random Greeting Service and get our "hello" greeting.
+	1. We autowire a DiscoveryClient instance. We'll use this to contact Eureka and ask about the connection details of Service 1.
+	2. We include a RestTemplate property. This will used to communicate with the Service 1. It allows us to make REST calls from our Java code.
+	3. We use the ```@Value``` annotation to get the values of the Service 1, serviceProtocol, and servicePath properties in our config file.
+	4. ```helloCloud``` Method:
+	   1. We use the DiscoveryClient to ask for Service 1 by name.
+	   2. We combine the serviceProtocol and servicePath from our configuration file with the host and port of Service 1 from Eureka to create the URI for the Service 1.
+	   3. We use the restTemplate and the URI to call the Service 1 and get our greeting.
 
 ## Running the System
 
 Start the services in the following order:
 
-1. cloud-config-service
+1. config-service
 2. eureka-service-registry
-3. random-greeting-service
-4. hello-cloud-service
-
-Open a browser and visit ```http://localhost:7979```. You should see one of the random greetings from the Random Greeting Service. Refresh the page and you should get different greetings.
+3. service 1
+4. service 2 (utilizing service 1)
