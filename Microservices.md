@@ -29,14 +29,14 @@
 		server.port=9999
 		spring.cloud.config.server.git.uri=https://github.com/Ahmed3lmallah/configServer.git
 
-1. Run the server
+1. start the server and visit ```http://localhost:9999/properties-file-name/master```.
 
 ### How to use configuration server?
 
-To create a client microservice that utlilizes the configuration server we need to follow the following steps:
+To create a client microservice that utlilizes the client server we need to follow the following steps:
 
 1. Create a new IntelliJ project for the configuration server using Spring Initializr (start.spring.io)
-	1. Name it `app-config-service`
+	1. Name it `service-name-service`
 	1. Use `Config client`, `Spring Boot Actuator`, and `Spring Web Starter` dependencies
 1. Add the `@EnableDiscoveryClient` annotation to the main project class.
 		
@@ -48,7 +48,7 @@ To create a client microservice that utlilizes the configuration server we need 
 				SpringApplication.run(AhmedElMallahMagicEightBallServiceApplication.class, args);
 			}
 		}
-1. Add `service-name.properties` file to the GitHub repository.
+1. Add `service-name-sevice.properties` file to the GitHub repository.
 	1. Include server port, refresh scope configuration, and any other properties we would need to configure the service
 
 			# this is the port on which our random-greeting-service will run
@@ -66,8 +66,7 @@ To create a client microservice that utlilizes the configuration server we need 
 
 			# This name must match the name of the properties file for this application
 			# in the configuration repository. we are looking for a file called hello-cloud-config.properties
-			spring.application.name=magic-eight-ball-service
-
+			spring.application.name=service-name-service
 			# This is the url to the configuration service that we will use to get our configuration
 			spring.cloud.config.uri=http://localhost:9999
 
@@ -77,201 +76,114 @@ To create a client microservice that utlilizes the configuration server we need 
 		@Value("${officialGreeting}")
 		private String officialGreeting;
 
-1. Run the server 
+1. Start the server and visit ```http://localhost:3344```.
 
 ## Service Registry
 
 This tutorial steps you through setting up a Eureka Service Registry and the creation of a system that uses the Service Registry to locate a remote service and then call it.
 
-You will need:
-
-- A public (read only) GitHub repository to store application configuration files.
-- Spring Initializr (start.spring.io)
-- IntelliJ Community Edition
-
 ### System Design
 
 ![image-20190620233725325](../images/hello-cloud-system-v2.png)
 
-This system builds on the hello-cloud-service tutorial and assumes that you have successfully completed that tutorial. Make sure you complete that tutorial before beginning this one.
+* Service 1 is a REST web service that uses Config Server for its configuration files. 
+* Service 1 registers with the Service Registry when it starts up.
+* Service 2 will utilize Service 1.
+* Service 2 asks the Service Registry for the location and connection details for Service 1 and uses that information to call it's controller method.
 
-It this tutorial we add a Service Registry component and a Random Greeting Service. 
+### How to setup Service Registry?
 
-* The Random Greeting Service is a REST web service that serves up on of several canned greetings at random. Like the Hello Cloud Service, it uses Config Server for its configuration files. 
-* The Random Greeting Service registers with the Service Registry when it starts up.
-* The Hello Cloud Service is modified to ask the Random Greeting Service for its greeting rather than using the ```officialGreeting``` value from its configuration file as in the previous version.
-* The Hello Cloud Service asks the Service Registry for the location and connection details for the Random Greeting Service and uses that information to call the Random Greeting Service.
+1. Create a new IntelliJ project for the service registery using Spring Initializr (start.spring.io)
+	1. Name it `eureka-service-registry`
+	1. Use `Eureka Server` dependency
+1. Add `@EnableEurekaServer` annotation to the main application class
 
-## Modifying the System
+		@SpringBootApplication
+		@EnableEurekaServer
+		public class EurekaServiceRegistryApplication {
 
-We will build the system in the following steps:
+			public static void main(String[] args) {
+				SpringApplication.run(EurekaServiceRegistryApplication.class, args);
+			}
+		}
 
-1. Create the Service Registry
-2. Create the Random Greeting Service
-3. Modify the Hello Cloud Service to use the Random Greeting Service
+1. Set the host name and port on which our Eureka Server will listen and configure some Eureka specific settings in the `application.properties` file.
 
-### Step 1: Create the Service Registry
+		server.port=8761
+		eureka.instance.hostname=localhost
 
-Our next step is to create the Service Registry. We'll use the Spring Initializr to create our project. Go to ```start.spring.io``` and enter the follow information:
+		# Shut off the client functionality of the Eureka server (used for HA)
+		eureka.client.registerWithEureka=false
+		eureka.client.fetchRegistry=false
+		eureka.client.serviceUrl.defaultZone=http://${eureka.instance.hostname}:${server.port}/eureka
 
-- Group = com.trilogyed
-- Artifact = eureka-service-registry
-- Dependencies = Eureka Server
+	The value for ```server.port``` is arbitrary. For our demonstration, the hostname is ```localhost``` because we are running it locally. The ```registerWithEureka``` and ```fetchRegistry``` setting turn off the high availability/clustering features of Eureka because we are only running a single node.
 
-Download the project, copy it into your working directory, and open the project in IntelliJ.
+1. Start your new Eureka Service Registry and visit ```http://localhost:8761```. You should see a Spring Eureka System Status page is everything is running correctly.
 
-The Spring Initializr adds the required starter dependencies to our POM file for a Eureka Service Registry, but we must add some annotations and some entires to the ```application.properties``` file to make our Service Registry operational.
+### How to use Service Registry?
 
-#### 1.1: Annotate the Main Application Class
+1. Create a new IntelliJ project for the service using Spring Initializr (start.spring.io)
+	1. Name it `service-name-service`
+	1. Use `Config Client`, `Spring Web Starter`, `Eureka Discovery Client`, and `Spring Boot Actuator` dependencies
+1. Create the Service Configuration File ```service-name-service.properties``` and add it to the GitHub repository
 
- Open the main application class (```com.trilogyed.eurekaserviceregistry.EurekaServiceRegistry.java```) and add the ```@EnableEurekaServer``` annotation to the class. Your code should look like this:
+	**The Config Server matches properties files to their respective services by name: the name of the configuration file must match the application name**
 
-```java
-@SpringBootApplication
-@EnableEurekaServer
-public class EurekaServiceRegistryApplication {
+		```java
+		# this is the port on which our random-greeting-service will run
+		server.port=2121
 
-	public static void main(String[] args) {
-		SpringApplication.run(EurekaServiceRegistryApplication.class, args);
-	}
-}
-```
+		# allow for RefreshScope
+		management.endpoints.web.exposure.include=*
+		```
+		
+	**As indicated by the comments, our service (random-greeting-service) will run on port 2121 (this value is arbitrary). The next entry is needed to enable us to force our service to re-read its configuration without having to restart**
 
-This annotation tells spring to enable the features in the Eureka Server starter dependencies. This essentially turns our application into a Eureka Server.
+1. Configure the Service to Use the Config Server
+	1. Create a file called ```src/main/resources/bootstrap.properties``` in the project and add the following entries:
 
-#### 1.2: Add Entries to Properties File
+			```java
+			# This file has just enough information so that our application can find the configuration
+			# service and its configuration settings.
 
-Now we must set the host name and port on which our Eureka Server will listen and configure some Eureka specific settings.
+			# This name must match the name of the properties file for this application
+			# in the configuration repository. we are looking for a file called hello-cloud-config.properties
+			spring.application.name=random-greeting-service
 
-Open ```src/main/resources/application.properties``` and add the following entries:
+			# This is the url to the configuration service that we will use to get our configuration
+			spring.cloud.config.uri=http://localhost:9999
+			```
 
-```java
-server.port=8761
-eureka.instance.hostname=localhost
+	**The ```spring.application.name``` property value must match the name of the properties file we checked into Git.**
+	**The host and port we use for the ```spring.cloud.config.uri``` must match the host and port values on which our Config Server is running**
+	
+1. Create the Controller
 
-# Shut off the client functionality of the Eureka server (used for HA)
-eureka.client.registerWithEureka=false
-eureka.client.fetchRegistry=false
-eureka.client.serviceUrl.defaultZone=http://${eureka.instance.hostname}:${server.port}/eureka
-```
+		```java
+		@RestController
+		@RefreshScope
+		public class RandomGreetingServiceController {
 
-The value for ```server.port``` is arbitrary. For our demonstration, the hostname is ```localhost``` because we are running it locally. The ```registerWithEureka``` and ```fetchRegistry``` setting turn off the high availability/clustering features of Eureka because we are only running a single node.
+			.
+			.
+			.
+		}
+		```
 
-Start your new Eureka Service Registry and visit ```http://localhost:8761```. You should see a Spring Eureka System Status page is everything is running correctly.
+1. Configure Random Greeting Service to Register with Eureka
+	1. Add the  ```@EnbleDiscoveryClient``` class level annotation to the main application class.
+			
+			```java
+			@SpringBootApplication
+			@EnableDiscoveryClient
+			public class RandomGreetingServiceApplication {
 
-### Step 2: Create the Random Greeting Service
-
-Our next step is to create the Random Greeting Service. This service randomly serves up one of several canned greetings and uses the Config Server to store its configuration settings.
-
-We'll build this project in five steps:
-
-1. Create the project with Spring Initializr
-2. Create the configuration file and check it into the Git repo
-3. Configure our Random Greeting Service to use the Config Server
-4. Write the Controller the serves up the greetings
-5. Add annotations so that our service will register itself with the Eureka Service Registry
-
-#### 2.1: Create the Project
-
-Now we will use the Spring Initializr to create our Hello Service. Go to ```start.spring.io``` and enter the follow information:
-
-- Group = com.trilogyed
-- Artifact = random-greeting-service
-- Dependencies = Config Client, Spring Web Starter, Eureka Discovery Client. Spring Boot Actuator
-
-Download the project, copy it into your working directory, and open the project in IntelliJ.
-
-#### 2.2: Create the Random Greeting Service Configuration File
-
-Now we will create the properties file that will hold the configuration setting for the Random Greeting Service. This file will replace the ```application.properties``` file that we have been using for configuration settings. The Config Server matches properties files to their respective services by name: the name of the configuration file must match the application name (we'll set the application name in the next step).
-
-Create a file called ```random-greeting-service.properties```, add the following entries, and check it into your configuration repo.
-
-```java
-# this is the port on which our random-greeting-service will run
-server.port=2121
-
-# allow for RefreshScope
-management.endpoints.web.exposure.include=*
-```
-
-As indicated by the comments, our service (random-greeting-service) will run on port 2121 (this value is arbitrary). The next entry is needed to enable us to force our service to re-read its configuration without having to restart (we'll talk more about that later in the tutorial).
-
-#### 2.3: Configure the Random Greeting Service to Use the Config Server
-
-Although we are moving our application's configuration settings to the Config Server, we must have minimal configuration within the service itself. We do this through the ```bootstrap.properties``` file. This file is read before the ```application.properties``` file (if present) and, for our purposes, contains a setting for our application name and the location of the Config Server. Create a file called ```src/main/resources/bootstrap.properties``` in your ```random-greeting-service``` project and add the following entries:
-
-```java
-# This file has just enough information so that our application can find the configuration
-# service and its configuration settings.
-
-# This name must match the name of the properties file for this application
-# in the configuration repository. we are looking for a file called hello-cloud-config.properties
-spring.application.name=random-greeting-service
-
-# This is the url to the configuration service that we will use to get our configuration
-spring.cloud.config.uri=http://localhost:9999
-```
-
-Important things to note:
-
-- The ```spring.application.name``` property value must match the name of the properties file we checked into Git.
-- The host and port we use for the ```spring.cloud.config.uri``` must match the host and port values on which our Config Server is running (the Config Server was created in the previous tutorial).
-
-#### 2.4: Create the Controller
-
-Our next task is to create a Controller with one endpoint. Create a file called ```com.trilogyed.randomgreetingservice.controller.RandomGreetingServiceController.java```.  Add the following code:
-
-```java
-@RestController
-@RefreshScope
-public class RandomGreetingServiceController {
-
-    // something to hold our greetings
-    private List<String> greetingList = new ArrayList<>();
-    // so we can randomly return a greeting
-    private Random rndGenerator = new Random();
-
-    public RandomGreetingServiceController() {
-
-        // some greetings
-        greetingList.add("HiYa!");
-        greetingList.add("Hello!!!");
-        greetingList.add("Howdy!");
-        greetingList.add("Greetings!");
-        greetingList.add("Hi!!!!!");
-    }
-
-    @RequestMapping(value = "/greeting", method = RequestMethod.GET)
-    public String getRandomGreeting() {
-
-        // select and return a random greeting
-        int whichGreeting = rndGenerator.nextInt(5);
-        return greetingList.get(whichGreeting);
-    }
-}
-```
-
-Things to note about the code:
-
-- The ```@RefreshScope``` as we did with the hello-cloud-service. Refer back to that tutorial for details about this feature.
-- We use an ArrayList and the constructor to set up our 5 canned greetings.
-- We use a random number generator and the List of greetings to return a random greeting each time the endpoint is called.
-
-#### 2.5: Configure Random Greeting Service to Register with Eureka
-
-The final task in the creation of the Random Greeting Service is to configure it to register with the Eureka Service Registry on startup. Open ```com.trilogyed.randomgreetingservice.RandomGreetingServiceApplication.java``` and add the  ```@EnbleDiscoveryClient``` class level annotation. Your code should look like this:
-
-```java
-@SpringBootApplication
-@EnableDiscoveryClient
-public class RandomGreetingServiceApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(RandomGreetingServiceApplication.class, args);
-	}
-}
-```
+				public static void main(String[] args) {
+					SpringApplication.run(RandomGreetingServiceApplication.class, args);
+				}
+			}
+			```
 
 ### Step 3: Modify the Hello Cloud Service
 
