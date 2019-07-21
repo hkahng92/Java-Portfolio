@@ -9,7 +9,28 @@
 
 ### How to setup configuration server?
 
+1. Create a new public (read only) GitHub repository to store application configuration files.
+1. Create a new IntelliJ project for the configuration server using Spring Initializr (start.spring.io)
+	1. Name it `app-config-server`
+	1. Use `Config Server` dependency
+1. Add the `@EnableConfigServer` annotation to the main project class.
+		
+		@SpringBootApplication
+		@EnableConfigServer
+		public class AhmedElMallahCloudConfigServerApplication {
 
+			public static void main(String[] args) {
+				SpringApplication.run(AhmedElMallahCloudConfigServerApplication.class, args);
+			}
+
+		}
+
+1. Define the config-server port and url for Github in the `application.properties` file.
+
+		server.port=9999
+		spring.cloud.config.server.git.uri=https://github.com/Ahmed3lmallah/configServer.git
+
+1. Run the server
 
 ### How to use configuration server?
 
@@ -23,9 +44,9 @@ You will need:
 - Spring Initializr (start.spring.io)
 - IntelliJ Community Edition
 
-## System Design
+### System Design
 
-![image-20190620233725325](../master/images/hello-cloud-system-v2.png)
+![image-20190620233725325](../images/hello-cloud-system-v2.png)
 
 This system builds on the hello-cloud-service tutorial and assumes that you have successfully completed that tutorial. Make sure you complete that tutorial before beginning this one.
 
