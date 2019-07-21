@@ -25,7 +25,7 @@ You will need:
 
 ## System Design
 
-![image-20190620233725325](..master/images/hello-cloud-system-v2.png)
+![image-20190620233725325](../master/images/hello-cloud-system-v2.png)
 
 This system builds on the hello-cloud-service tutorial and assumes that you have successfully completed that tutorial. Make sure you complete that tutorial before beginning this one.
 
