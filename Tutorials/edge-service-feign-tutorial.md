@@ -10,7 +10,7 @@ You will need:
 
 ## System Design
 
-![image-20190620233725325](images/hello-cloud-system-v2.png)
+![image-20190620233725325](../images/hello-cloud-system-v2.png)
 
 
 **Important:** This system builds on the ```service-registry-tutorial``` and assumes that you have successfully completed it. Make sure you complete that tutorial before beginning this one.

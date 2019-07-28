@@ -55,7 +55,7 @@ A **binding** is a rule that an exchange uses to route messages to a queue. Rout
 
 The following diagram shows our email list system:
 
-![image-20190619122849437](images/email-list-system.png)
+![image-20190619122849437](../images/email-list-system.png)
 
 The **account service** is a REST web service that processes incoming new account requests. Part of that processing includes sending a new email list entry message to the ```queue-demo-exchange```. Messages sent to the exchange are routed to the ```email-list-add-queue``` and then processed by the **email list queue consumer** application. 
 
@@ -453,11 +453,11 @@ Run the producer application in IntelliJ.
 
 Send a POST to the producer application. It should look similar to this in Postman:
 
-![image-20190625162439831](images/account-post.png)
+![image-20190625162439831](../images/account-post.png)
 
 Notice the console output from the consumer application. It should look something like this:
 
-![image-20190625162842021](images/consumer-console-output.png)
+![image-20190625162842021](../images/consumer-console-output.png)
 
 
 #### Step 5: Stop the Consumer Application
@@ -468,7 +468,7 @@ Stop the consumer application. Now there is nothing listening to our queue.
 
 Send a POST to the producer application. It should look similar to this in Postman:
 
-![image-20190625163355578](images/account-post-2.png)
+![image-20190625163355578](../images/account-post-2.png)
 
 The service should return a message of "Account Created" even though the consumer application is down.
 
@@ -476,7 +476,7 @@ The service should return a message of "Account Created" even though the consume
 
 Finally, start the consumer application. You should see output in the console similar to this right after the service starts up:
 
-![image-20190625163910667](images/consumer-console-output-2.png)
+![image-20190625163910667](../images/consumer-console-output-2.png)
 
 **Note:** This message was in the queue waiting to be processed when the consumer application restarted.
 

@@ -83,7 +83,7 @@ The RSVP application is a typical REST CRUD web service with the addition of a c
 
 
 
-![image-20190619122849437](images/rsvp-cache-system.png)
+![image-20190619122849437](../images/rsvp-cache-system.png)
 
 ## Building the System
 
