@@ -1,4 +1,4 @@
-# Cheat Sheets
+# Notes
 
 ### Table of Contents
   * #### [Java Syntax](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/Java.md)
