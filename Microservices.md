@@ -2,8 +2,8 @@
 
 ### Table of Contents
 
-  * [Configuration Server](#Configuration-Server)
-  * [Service Registry](#Service-Registry)
+  * [Configuration Server](#Configuration-Server-tutorial)
+  * [Service Registry](#Service-Registry-tutorial)
 
 ## Configuration Server [Tutorial](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/Tutorials/config-server-tutorial.md)
 
