@@ -4,6 +4,9 @@
 
   * [Configuration Server](#Configuration-Server-tutorial)
   * [Service Registry](#Service-Registry-tutorial)
+  * [Queues Tutorial](#Queues-Spring-RabbitMQ-Tutorial)
+  * [Cache Tutorial](#cache-spring-data-caching-tutorial)
+  * [Edge Service Tutorial](#edge-service-feign-tutorial)
 
 ## Configuration Server [Tutorial](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/Tutorials/config-server-tutorial.md)
 
@@ -269,3 +272,5 @@ Start the services in the following order:
 ## Cache [Spring Data Caching Tutorial](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/Tutorials/spring-caching-tutorial.md)
 
 ## Edge Service [Feign Tutorial](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/Tutorials/edge-service-feign-tutorial.md)
+
+#### [Go Back](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/README.md)
