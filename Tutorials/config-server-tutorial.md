@@ -10,7 +10,7 @@ You will need:
 
 ## System Design
 
-![image-20190619122849437](images/cloud-config-system.png)
+![image-20190619122849437](../images/cloud-config-system.png)
 
 All web service configuration files are stored in the Git repo (in our case, the Git repo will be on GitHub). The Config Server sits in front of the Git repo and provides access to the confguration files. Config Server clients (such as the Web Service) contact the Config Server on start up and ask for their configuration files. The configuration settings are then used by the Web Service as it starts up and while it is running.
 
