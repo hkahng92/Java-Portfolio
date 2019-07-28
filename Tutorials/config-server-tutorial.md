@@ -177,6 +177,6 @@ Finally, we will demonstrate how to use the ```@RefreshScope``` feature to read 
 1. Modify the hello-cloud-service.properties file by setting the ```officialGreeting``` property value to ```This is the NEW greeting!``` 
 2. Send a POST request to ```http://localhost:7979/actuator/refresh``` using Postman. The body of the post should be and empty JSON object. Your Postman request should look like this:
 
-![image-20190620192927630](/Users/ericward/Documents/github/Java-s1/00-units/02-unit/01-module-12-factor-cloud-native/02-lesson-configuration-server/activities/hello-cloud-system/images/postman-refresh-request.png)
+![image-20190620192927630](../images/postman-refresh-request.png)
 
 3. Open your browser and visit ```localhost:7979/hello```. The application should display the new greeting.
