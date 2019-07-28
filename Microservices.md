@@ -5,7 +5,7 @@
   * [Configuration Server](#Configuration-Server)
   * [Service Registry](#Service-Registry)
 
-## Configuration Server
+## [Configuration Server]()
 
 ### How to setup configuration server?
 
@@ -255,7 +255,7 @@ This tutorial steps you through setting up a Eureka Service Registry and the cre
 	   2. We combine the serviceProtocol and servicePath from our configuration file with the host and port of Service 1 from Eureka to create the URI for the Service 1.
 	   3. We use the restTemplate and the URI to call the Service 1 and get our greeting.
 
-## Running the System
+### Running the Service Registry System
 
 Start the services in the following order:
 
@@ -263,3 +263,5 @@ Start the services in the following order:
 2. eureka-service-registry
 3. service 1
 4. service 2 (utilizing service 1)
+
+## Service Registry
