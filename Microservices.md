@@ -4,9 +4,9 @@
 
   * [Configuration Server](#Configuration-Server)
   * [Service Registry](#Service-Registry)
-  * [Queues Tutorial](#Queues)
-  * [Cache Tutorial](#cache)
-  * [Edge Service Tutorial](#edge-service)
+  * [Queues](#Queues)
+  * [Cache](#cache)
+  * [Edge Service](#edge-service)
 
 ## Configuration Server 
 
