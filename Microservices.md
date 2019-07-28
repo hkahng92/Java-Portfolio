@@ -179,7 +179,7 @@ This tutorial steps you through setting up a Eureka Service Registry and the cre
 
 ### Creating Service 2 that utitlizes Service 1 registered with Service Registry
 
-1. Add Eureka Client Dependency or manually add the following to an existing project POM.xml file
+1. Add `Eureka Client` Dependency or manually add the following to an existing project POM.xml file
 
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
