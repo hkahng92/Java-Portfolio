@@ -5,7 +5,7 @@
   * [Configuration Server](#Configuration-Server)
   * [Service Registry](#Service-Registry)
 
-## [Configuration Server]()
+## Configuration Server [Tutorial](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/Tutorials/config-server-tutorial.md)
 
 ### How to setup configuration server?
 
@@ -78,7 +78,7 @@ To create a client microservice that utlilizes the client server we need to foll
 
 1. Start the server and visit ```http://localhost:3344```.
 
-## Service Registry
+## Service Registry [Tutorial](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/Tutorials/service-registry-tutorial.md)
 
 This tutorial steps you through setting up a Eureka Service Registry and the creation of a system that uses the Service Registry to locate a remote service and then call it.
 
@@ -264,4 +264,8 @@ Start the services in the following order:
 3. service 1
 4. service 2 (utilizing service 1)
 
-## Service Registry
+## Queues [Spring RabbitMQ Tutorial](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/Tutorials/spring-rabbitmq-tutorial.md)
+
+## Cache [Spring Data Caching Tutorial](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/Tutorials/spring-caching-tutorial.md)
+
+## Edge Service [Feign Tutorial](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/Tutorials/edge-service-feign-tutorial.md)

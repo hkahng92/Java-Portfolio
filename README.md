@@ -7,6 +7,12 @@
 	* #### [Spring JPA](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/SpringJPA.md)
 	* #### [View Models, Service layer & TDDs](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/ServiceLayer.md)
   * #### [MySQL](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/mySQL.md)
+  * #### [Microservices](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/Microservices.md)
+	* #### [Configuration Server](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/Microservices.md#Configuration-Server)
+	* #### [Service Registry](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/Microservices.md#Service-Registry)
+	* #### [Queues](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/Tutorials/spring-rabbitmq-tutorial.md)
+	* #### [Cache](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/Tutorials/spring-caching-tutorial.md)
+	* #### [Edge Service](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/Tutorials/edge-service-feign-tutorial.md)
 	
 ## BASH:
 
