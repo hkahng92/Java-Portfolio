@@ -83,6 +83,8 @@ To create a client microservice that utlilizes the client server we need to foll
 
 1. Start the server and visit ```http://localhost:3344```.
 
+*To update the service Beans if changes were made to the .properties file we can make use of `@RefreshScope` by using the `curl -d {} http://localhost:9001/refresh`*
+
 ## Service Registry 
 
 ### [Service Registry Tutorial](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/Tutorials/service-registry-tutorial.md)
