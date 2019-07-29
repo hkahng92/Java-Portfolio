@@ -83,7 +83,7 @@ To create a client microservice that utlilizes the client server we need to foll
 
 1. Start the server and visit ```http://localhost:3344```.
 
-*To update the service Beans if changes were made to the .properties file we can make use of `@RefreshScope` by using the `curl -d {} http://localhost:9001/refresh`*
+*To update the service Beans if changes were made to the .properties file we can make use of `@RefreshScope` by using `curl -d {} http://localhost:3344/refresh`*
 
 ## Service Registry 
 
