@@ -374,6 +374,68 @@ We realize that our ServiceLayer test result will have relience on whether the a
 
 *The same approch could be used to design DAO TDDs, except that we wouldn't need to worry about having mocks.*
 
+#### How to mock an external microservice?
+
+* Case (1): An external service that is called using RestTemplate and DiscoveryClient
+
+	First, the setUp:
+	
+		private TaskerServiceLayer service;
+		private TaskerDao taskerDao;
+		private RestTemplate restTemplate;
+		private DiscoveryClient discoveryClient;
+
+		@Value("${adServerServiceName}")
+		private String adServerServiceName;
+
+		@Value("${serviceProtocol}")
+		private String serviceProtocol;
+
+		@Value("${servicePath}")
+		private String servicePath;
+
+		@Before
+		public void setUp() throws Exception {
+			
+			// We call the mock methods here
+			setUpTaskerDaoMock();
+			setUpRestTemplateMock();
+			setUpDiscoveryClientMock();
+
+			// We use a custome made service layer constructor to pass on the mocked classes and properties
+			service = new TaskerServiceLayer(taskerDao, discoveryClient, restTemplate, adServerServiceName, serviceProtocol, servicePath);
+
+		}
+		
+	Second, we mock the RestTemplate:
+	
+		private void setUpRestTemplateMock() {
+		
+			restTemplate = mock(RestTemplate.class);
+
+			doReturn("BOGO large 2 topping pizzas!").when(restTemplate).getForObject("http://localhost:6107/ad", String.class);
+		}
+
+	Finally, we mock the discoveryClient:
+	
+		private void setUpDiscoveryClientMock() {
+			
+			discoveryClient = mock(DiscoveryClient.class);
+			
+			// discoveryClient returns a LinkedList of DefaultServiceInstances with hostName and portNumber
+			List<ServiceInstance> instances = new LinkedList<>();
+
+			DefaultServiceInstance defaultServiceInstance = new DefaultServiceInstance("","","localhost",6107,true);
+
+			instances.add(defaultServiceInstance);
+
+			doReturn(instances).when(discoveryClient).getInstances("adserver-service");
+		}
+
+* Case (2): An external service that is called using Feign Client
+
+Still figuring this one out!
+
 ### Using ServiceLayer in the controller
 
 To use the ServiceLayer in the controller, we simply `@Autowired` the serviceLayer in the controller class to use its methods:
