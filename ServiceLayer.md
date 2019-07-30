@@ -434,7 +434,7 @@ We realize that our ServiceLayer test result will have relience on whether the a
 
 * Case (2): An external service that is called using Feign Client
 
-		Haven't go there yet!
+		Haven't got there yet!
 
 ### Using ServiceLayer in the controller
 
