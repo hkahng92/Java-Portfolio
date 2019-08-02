@@ -277,6 +277,15 @@ Start the services in the following order:
 
 ### [Spring RabbitMQ Tutorial](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/Tutorials/spring-rabbitmq-tutorial.md)
 
+* To use RabbitMQ GUI: 
+
+1. Go to root directory. Default: C:\Program Files\RabbitMQ Server\rabbitmq_server-3.7.16\sbin>
+1. Use RabbitMQ CMD
+1. `rabbitmq-plugins enable rabbitmq_management`
+1. Restart the rappitmq server
+1. visit localhost:15672/
+1. Login with username: `guest` and Password: `guest`
+
 ### Resources
 
 ## Cache
