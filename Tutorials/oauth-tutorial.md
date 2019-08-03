@@ -13,7 +13,7 @@ You will need:
 
 Oauth-greeter is a simple Hello World REST web service that requires a valid OAuth 2 token for access. When presented with an OAuth 2 token, the oaut-greeter calls the Authorization Server to validate the token. If the token is valie, access is granted, otherwise access is denied. The OAuth 2 token is provided to the client (Postman in our case) by the Authorization Server based on valid username/password and entries in the Security Schema. The client then sends this token along with the request to the oaut-greeter service.
 
-![image](images/oauth-system.png)
+![image](../images/oauth-system.png)
 
 
 
@@ -308,17 +308,17 @@ We request a bearer token from the Authorization Server by sending a POST to ```
 
 Open Postman and create a POST request as shown in the following two images. The first image shows how to set the authorization headers. The second image shows how to set the form data.
 
-![image](images/token-request-auth-headers.png)
+![image](../images/token-request-auth-headers.png)
 
 
 
-![image](images/token-request-form-data.png)
+![image](../images/token-request-form-data.png)
 
 
 
 You should get the following result when you submit this request:
 
-![image](images/token-request-result.png)
+![image](../images/token-request-result.png)
 
 ##### Send a Request to the Resource Server
 
@@ -326,4 +326,4 @@ Now we will send a request to the Resource Server that includes the token. The R
 
 Our request to the Resource Server must include the token we just got from the Authorization Server. We include the token in the authorization headers under the Bearer Token type. Make the following request to the Resource Server and you show get the result shown:
 
-![image](images/resource-server-request.png)
+![image](../images/resource-server-request.png)
