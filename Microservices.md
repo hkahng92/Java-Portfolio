@@ -281,7 +281,7 @@ Synchronous processing means that you can only execute one process at a time, wh
 
 **What is a Queue?**
 
-Queue is a *linear data structure, or an ordered list of elements of similar data types*. in which the first element is inserted from one end called the *REAR (also called tail)*, and the removal of existing element takes place from the other end called as *FRONT (also called head)*. This makes queue as *FIFO (First in First Out) data structure*, which means that element inserted first will be removed first. The process to add an element into queue is called Enqueue and the process of removal of an element from queue is called Dequeue.
+**Queue** is a **linear data structure, or an ordered list of elements of similar data types**. in which the first element is inserted from one end called the **REAR (also called tail)**, and the removal of existing element takes place from the other end called as **FRONT (also called head)**. This makes queue as **FIFO (First in First Out) data structure**, which means that element inserted first will be removed first. The process to add an element into queue is called Enqueue and the process of removal of an element from queue is called Dequeue.
 
 **What problems do Queues solve?**
 
@@ -331,9 +331,9 @@ A **binding** is a rule that an exchange uses to route messages to a queue. Rout
 
 [Message Queues - AWS](https://aws.amazon.com/message-queue/)
 
-#### Tutorial: [Spring RabbitMQ Tutorial](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/Tutorials/spring-rabbitmq-tutorial.md)
+### Tutorial: [Spring RabbitMQ Tutorial](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/Tutorials/spring-rabbitmq-tutorial.md)
 
-#### Tutorial Summary:
+### Tutorial Summary:
 
 
 * To use RabbitMQ GUI: 
