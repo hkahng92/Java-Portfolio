@@ -383,6 +383,10 @@ A **cache is a copy of the original data** that is stored for future reference. 
 
 **Additional Resources:**
 
+* 
+* 
+* 
+
 ### Tutorial: [Spring Data Caching Tutorial](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/Tutorials/spring-caching-tutorial.md)
 
 ### Tutorial Summary:
@@ -393,8 +397,42 @@ A **cache is a copy of the original data** that is stored for future reference. 
 
 ## Edge Service
 
-### [Feign Tutorial](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/Tutorials/edge-service-feign-tutorial.md)
+**What Is a Edge Service?**
 
-### Resources
+**Edge Service** is an **entry point into a service that sits in front of an API.** In other words, it acts as a gateway to other services. Edge service is usually exposed to the public internet and is used to route HTTP requests to the appropriate service(s).
 
-#### [Go Back](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/README.md)
+**Why Use an Edge Service?**
+
+* Benefits
+	* Allows us to request from multiple services with a single request
+	* Encapsulates the internal structure of the app
+	* May improve security through authentication
+	* May improve performance through load balancing
+	* Improves the user experience
+	* Can be tailored to specific clients
+
+* Concerns
+	* Another component to manage and update
+
+**How Does an Edge Service Work?**
+
+1. A client makes a request
+1. Looks for a microservice (or multiple microservices) to deliver the request
+1. Multiple microservices are invoked and aggregated
+1. Returns the response to the caller
+
+**Additional Resources:**
+
+* 
+* 
+* 
+
+### Tutorial: [Feign Tutorial](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/Tutorials/edge-service-feign-tutorial.md)
+
+### Tutorial Summary:
+
+1. 
+1.
+1.
+
+#### [Go Back...](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/README.md)
