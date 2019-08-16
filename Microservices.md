@@ -329,7 +329,7 @@ A **binding** is a rule that an exchange uses to route messages to a queue. Rout
 
 **Additional Resources:**
 
-[Message Queues - AWS](https://aws.amazon.com/message-queue/)
+* [Message Queues - AWS](https://aws.amazon.com/message-queue/)
 
 ### Tutorial: [Spring RabbitMQ Tutorial](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/Tutorials/spring-rabbitmq-tutorial.md)
 
@@ -347,8 +347,6 @@ A **binding** is a rule that an exchange uses to route messages to a queue. Rout
 1. Restart the rappitmq server
 1. visit localhost:15672/
 1. Login with username: `guest` and Password: `guest`
-
-
 
 ## Cache
 
@@ -379,7 +377,7 @@ A **cache is a copy of the original data** that is stored for future reference. 
 	* If the accuracy of the data is critical, a cache is likely not the best solution.
 * When data changes often, a cache is likely not very effective.
 
-** Difference between Cache and buffer:**
+**Difference between Cache and buffer:**
 
 **Caching** is accessing a copy of the data, while **Buffering** preloads data from the “original” source. Buffering is usually used with large file sizes to match the transmission speed of the sender and the receiver.
 
