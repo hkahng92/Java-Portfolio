@@ -275,7 +275,66 @@ Start the services in the following order:
 
 ## Queues 
 
-### [Spring RabbitMQ Tutorial](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/Tutorials/spring-rabbitmq-tutorial.md)
+**Asynchronous vs. synchronous processing:** 
+
+Synchronous processing means that you can only execute one process at a time, while Asynchronous processing means multiple process can be executed at a time and you don't have to finish executing the current process in order to move on to next one.
+
+**What is a Queue?**
+
+Queue is a *linear data structure, or an ordered list of elements of similar data types*. in which the first element is inserted from one end called the *REAR (also called tail)*, and the removal of existing element takes place from the other end called as *FRONT (also called head)*. This makes queue as *FIFO (First in First Out) data structure*, which means that element inserted first will be removed first. The process to add an element into queue is called Enqueue and the process of removal of an element from queue is called Dequeue.
+
+**What problems do Queues solve?**
+
+1. Queues enable asynchronous communication, which means that the endpoints that are producing and consuming messages interact with the queue, not each other. Producers can add requests to the queue without waiting for them to be processed. Consumers process messages only when they are available. No component in the system is ever stalled waiting for another, optimizing data flow.
+
+1. Queues make your service reliable, and reduce the errors that happen when different parts of your system go offline. By separating different components with message queues, you create more fault tolerance. If one part of the system is ever unreachable, the other can still continue to interact with the queue. The queue itself can also be mirrored for even more availability.
+
+**How Does a Queue Work?**
+
+1. Producer creates a new entry/message.
+	* Entry/message includes the exchange name and a binding key (routing key).
+1. Entry/message is sent to a message broker such as RabbitMQ.
+1. Entry/message is routed to the appropriate queue(s) based on the binding key and distribution protocols.
+1. Consumer listening to the Queue receives the message when available.
+
+### Terminology
+
+It's helpful to review queue-related terminlogy before we look at the design and begin implementation.
+
+#### AMQP
+
+Advanced Message Queuing Protocol (**AMQP**) is a messaging protocol that allows clients and messaging middleware to communicate in a standardized manner. RabbitMQ and the Spring client libraries conform to AMQP.
+
+#### Producer
+
+The **producer** is the application, process, or code that creates new entries and places them in the queue for processing.
+
+#### Consumer
+
+The **consumer** is the application, process, or code that processes, or consumes, the queue entries created by the producer.
+
+#### Queue
+
+A **queue** is a repository for messages. Producers place the messages in the queue. Consumers process the messages.
+
+#### Exchange
+
+An **exchange** is where producers send messages in an AMQP system. An exchange then routes the messages to one or more queues based on the type of exchange and routing rules (called bindings, explained below).
+
+**Topic exchanges** route messages to one or more queues based on a routing key and the pattern used to bind the exchange to the queue or queues. Topic exchanges allow consumers to choose which types of messages they want to process and which ones they want to ignore.
+
+#### Binding
+
+A **binding** is a rule that an exchange uses to route messages to a queue. Routing keys and binding rules can be used to filter messages and only send certain messages to certain queues.
+
+**Additional Resources:**
+
+[Message Queues - AWS](https://aws.amazon.com/message-queue/)
+
+#### Tutorial: [Spring RabbitMQ Tutorial](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/Tutorials/spring-rabbitmq-tutorial.md)
+
+#### Tutorial Summary:
+
 
 * To use RabbitMQ GUI: 
 
@@ -286,7 +345,7 @@ Start the services in the following order:
 1. visit localhost:15672/
 1. Login with username: `guest` and Password: `guest`
 
-### Resources
+
 
 ## Cache
 

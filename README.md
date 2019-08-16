@@ -33,3 +33,9 @@
 	Git commit -m "Comment" 
 	Git push origin "branch name"
 	Git pull
+	
+### PWS:
+		
+	cf login -a api.run.pivotal.io
+	cf help
+	cf push your_app
