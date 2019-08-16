@@ -427,7 +427,7 @@ A **cache is a copy of the original data** that is stored for future reference. 
 * 
 * 
 
-### Tutorial: [Feign Tutorial](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/Tutorials/edge-service-feign-tutorial.md)
+### Tutorial: [Edge Service / Feign Tutorial](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/Tutorials/edge-service-feign-tutorial.md)
 
 ### Tutorial Summary:
 
