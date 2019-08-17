@@ -2,11 +2,12 @@
 
 ### Table of Contents
 
-  * [Configuration Server](#Configuration-Server)
-  * [Service Registry](#Service-Registry)
-  * [Queues](#Queues)
-  * [Cache](#cache)
-  * [Edge Service](#edge-service)
+  * [Configuration Server](#Configuration-Server) - [Tutorial](#config-server-tutorial)
+  * [Service Registry](#Service-Registry) - [Tutorial](#service-registry-tutorial)
+  * [Queues](#Queues) - [Tutorial](#tutorial-spring-rabbitmq-tutorial)
+  * [Cache](#cache) - [Tutorial](#tutorial-spring-data-caching-tutorial)
+  * [Edge Service](#edge-service) - [Tutorial](#tutorial-edge-service--feign-tutorial)
+  * [Circuit Breaker](#circuit-breaker-pattern) - [Tutorial](#tutorial-1)
 
 ## Configuration Server 
 
