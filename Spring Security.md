@@ -2,10 +2,10 @@
 
 ### Table of Contents
 
-  * [Configuration Server](#Configuration-Server)
-  * [Service Registry](#Service-Registry)
+  * [Configuration Server](#Security-Basics)
+	* [Service Registry](#Service-Registry)
   * [Queues](#Queues)
-  * [Cache](#cache)
+	* [Cache](#cache)
   * [Edge Service](#edge-service)
   
 ## Security Basics
@@ -84,6 +84,90 @@ According to OWASP, the definition of Cross Site Request Forgery attacks is: “
 
 
 ### Tutorial: [Spring Security Tutorial](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/Tutorials/spring-security-tutorial.md)
+
+### Tutorial Summary:
+
+1.
+1.
+1.
+
+## OAuth 2.0
+
+**What is OAuth?**
+
+OAuth (Open Authorization) is an open standard for token-based authentication and authorization in distributed web applications.
+
+**Federated Authentication:**
+
+This means that one system delegates the responsibility of authentication to another system. You have seen this with "Login with Facebook." or "Log in with your Google account." on various websites.
+
+**Delegated Authorization:**
+
+This involves you giving another user or an app permission to access one or more of the resources under your control. For example, you might have a task manager application that integrates with Google Calendar. This application may need permission to add events to your calendar.
+
+## Spring OAuth Concepts
+
+**Authorization Server:**
+
+The authorization server is the part of an OAuth 2 system that issued the bearer tokens for users.
+
+This is a stand alone Spring Boot service that serves OAuth 2 bearer tokens to clients. This service also validates tokens presented by a resource server and sends back the user data associated with the given token.
+
+**Resource Server:**
+
+A resource server is a service that contains endpoints that are protected by the bearer token. Several resource servers can share on authorization server. Authorization servers can also be resource servers. Adding the `@EnableResourceServer` annotation turns a web service into a resource server.
+
+**Authentication Manager**
+
+The Authentication Manager plays the same role in an OAuth 2 system as it does in a non-OAuth 2 Spring Security system. The authentication manager is used by the authorization server to authenticate users for incoming requests.
+
+**Authorities:**
+
+Authorities play the same role in an OAuth 2 system as the do in a non-OAuth 2 Spring Security System.
+
+**password encoder:**
+
+The password encoder is used to encode both incoming user password values and incoming client secrets before they are compared to the values stored in the system.
+
+**Bearer Token:**
+
+The access token used by OAuth 2. These tokens are arbitrary and have no meaning in and of themselves.
+
+1. Bearer tokens are issued by the authorization server when the client requests a token and presents valid authentication data.
+1. The client then uses the bearer token to access to a resource server.
+1. Because these token have no inherent meaning, the resource server presents the token to the authorization server in exchange for user information.
+1. The resource server grants access to the requested endpoint if the token is valid.
+
+**Grant Types:**
+
+OAuth 2 has different processes for granting tokens based on different use cases:
+* Password Grant: the client exchanges a username/password for a token. This should only be used for granting access to your service's own application. The system should never allow third-party applications for gaining access to passwords.
+* Authorization Code Grant: the client exchanges an authorization code for a token.
+* Client Credential Grant: the application is requesting access as itself, not on behalf of a user.
+
+**Clients:**
+
+A client is a type of application that is allowed to access the system. For example:
+* HTML5
+* Android
+* Desktop Application
+* Smart Watch
+
+The ability to control how both clients and users that can access the system allows much finer grained control over access. For example, you could grant one level of access to Joe Smith using an HTML5 application and another level to Joe Smith using his smart phone.
+
+**Client Details Service:**
+
+The client details service is the component responsible for retrieving information about the clients that are configured to have access to the system.
+
+**Client Secret:**
+
+The client secret is like a password for the given client. The client secret is set when the Client Details Service is being created, configured, and populated.
+
+**User Info Endpoint:**
+
+This is an endpoint on the authorization server that allows resource servers to exchange valid tokens for the associated user data.
+
+### Tutorial: [OAuth 2 Tutorial](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/Tutorials/oauth-tutorial.md)
 
 ### Tutorial Summary:
 
