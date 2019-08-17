@@ -2,11 +2,10 @@
 
 ### Table of Contents
 
-  * [Configuration Server](#Security-Basics)
-	* [Service Registry](#Service-Registry)
-  * [Queues](#Queues)
-	* [Cache](#cache)
-  * [Edge Service](#edge-service)
+  * [Security Basics](#Security-Basics)
+	* [Spring Security Tutorial](#tutorial-summary)
+  * [OAuth 2.0](#Queues)
+	* [OAuth 2.0 Tutorial](#tutorial-summary-1)
   
 ## Security Basics
 
