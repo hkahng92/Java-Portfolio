@@ -3,7 +3,7 @@
 ### Table of Contents
 
   * [Security Basics](#Security-Basics) - [Spring Security Tutorial](#tutorial-spring-security-tutorial)
-  * [OAuth 2.0](#Queues) - [OAuth 2.0 Tutorial](#tutorial-oauth-2-tutorial)
+  * [OAuth 2.0](#oauth-20) - [OAuth 2.0 Tutorial](#tutorial-oauth-2-tutorial)
   
 ## Security Basics
 
