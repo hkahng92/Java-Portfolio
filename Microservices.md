@@ -9,82 +9,72 @@
   * [Edge Service](#edge-service) - [Tutorial](#tutorial-edge-service--feign-tutorial)
   * [Circuit Breaker](#circuit-breaker-pattern) - [Tutorial](#tutorial-1)
 
-## Configuration Server 
+## Configuration Server
+
+**What are the advantages of externalizing configuration settings?**
+
+* Settings can be changed without having to rebuild code.
+* Settings can be changed without having to restart the application.
+* Settings are centralized.
+* We can trace changes to settings.
+* We can provide encryption and decryption of sensitive settings.
+
 
 ### [Config Server Tutorial](https://github.com/Ahmed3lmallah/Java-Portfolio/blob/master/Tutorials/config-server-tutorial.md)
 
-### How to setup configuration server?
+### Tutorial Summary:
 
-1. Create a new public (read only) GitHub repository to store application configuration files.
-1. Create a new IntelliJ project for the configuration server using Spring Initializr (start.spring.io)
-	1. Name it `app-config-server`
-	1. Use `Config Server` dependency
+#### How to setup configuration server?
+
+1. Create a new (or use an existing) GitHub repository to store application configuration files.
+1. Create a new IntelliJ project called `config-server` for the configuration server using Spring Initializr with the `Config Server` dependency.
 1. Add the `@EnableConfigServer` annotation to the main project class.
-		
-		@SpringBootApplication
-		@EnableConfigServer
-		public class AhmedElMallahCloudConfigServerApplication {
-
-			public static void main(String[] args) {
-				SpringApplication.run(AhmedElMallahCloudConfigServerApplication.class, args);
-			}
-		}
-
-1. Define the config-server port and url for Github in the `application.properties` file.
+1. Define the `server.port` and `spring.cloud.config.server.git.uri` for Github in the `application.properties` file.
 
 		server.port=9999
 		spring.cloud.config.server.git.uri=https://github.com/Ahmed3lmallah/configServer.git
+		spring.cloud.config.server.git.username: username
+		spring.cloud.config.server.git.password: password
 
-1. start the server and visit ```http://localhost:9999/properties-file-name/master```.
+1. Start the server and visit ```http://localhost:9999/properties-file-name/master```.
 
-### How to use configuration server?
+#### How to utilize a configuration server?
 
-To create a client microservice that utlilizes the client server we need to follow the following steps:
-
-1. Create a new IntelliJ project for the configuration server using Spring Initializr (start.spring.io)
-	1. Name it `service-name-service`
-	1. Use `Config client`, `Spring Boot Actuator`, and `Spring Web Starter` dependencies
-1. Add the `@EnableDiscoveryClient` annotation to the main project class.
+1. Add the `Config client` and `Spring Boot Actuator` dependencies to the service.
 		
-		@SpringBootApplication
-		@EnableDiscoveryClient
-		public class AhmedElMallahMagicEightBallServiceApplication {
-
-			public static void main(String[] args) {
-				SpringApplication.run(AhmedElMallahMagicEightBallServiceApplication.class, args);
-			}
-		}
-1. Add `service-name-sevice.properties` file to the GitHub repository.
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-config</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		
+1. Add `app-name-service.properties` file to the GitHub repository.
 	1. Include server port, refresh scope configuration, and any other properties we would need to configure the service
 
-			# this is the port on which our random-greeting-service will run
-			server.port=3344
-
-			# allow for RefreshScope
+			
+			server.port=8080
+			# Allow for RefreshScope
 			management.endpoints.web.exposure.include=*
  
 1. Add `bootstrap.properties` file to the resources folder
 	1. include the config server uri
 	1. include the service name (**Must match the properties file name in Github**)
 	
-			# This file has just enough information so that our application can find the configuration
-			# service and its configuration settings.
-
-			# This name must match the name of the properties file for this application
-			# in the configuration repository. we are looking for a file called hello-cloud-config.properties
 			spring.application.name=service-name-service
-			# This is the url to the configuration service that we will use to get our configuration
 			spring.cloud.config.uri=http://localhost:9999
 
-1. Add `@RefreshScope` to the controller class using the service
+1. Add `@RefreshScope` to the controller class
 1. To extract predefined variables from the properties file we can use: 
 		
 		@Value("${officialGreeting}")
 		private String officialGreeting;
 
-1. Start the server and visit ```http://localhost:3344```.
+1. Start the service.
 
-*To update the service Beans if changes were made to the .properties file we can make use of `@RefreshScope` by using `curl -d {} http://localhost:3344/refresh`*
+*To update the service Beans if changes were made to the .properties file we can make use of `@RefreshScope` by using `$ curl localhost:8080/actuator/refresh -d {} -H "Content-Type: application/json"`*
 
 ## Service Registry 
 
